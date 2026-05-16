@@ -1,0 +1,109 @@
+services:
+  opensearch-node1:
+    image: opensearchproject/opensearch:3.6.0
+    container_name: opensearch-node1
+    environment:
+      - cluster.name=opensearch-cluster
+      - node.name=opensearch-node1
+      - node.roles=cluster_manager,data,ingest
+      - discovery.seed_hosts=opensearch-node1,opensearch-node2,opensearch-ml1
+      - cluster.initial_cluster_manager_nodes=opensearch-node1,opensearch-node2
+      - bootstrap.memory_lock=true
+      - "OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m"
+      - OPENSEARCH_INITIAL_ADMIN_PASSWORD=${OPENSEARCH_INITIAL_ADMIN_PASSWORD}
+      - plugins.ml_commons.only_run_on_ml_node=true
+      - plugins.ml_commons.remote_inference.enabled=true
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+    volumes:
+      - opensearch-data1:/usr/share/opensearch/data
+    ports:
+      - "9200:9200"
+      - "9600:9600"
+    networks:
+      - opensearch-net
+
+  opensearch-node2:
+    image: opensearchproject/opensearch:3.6.0
+    container_name: opensearch-node2
+    environment:
+      - cluster.name=opensearch-cluster
+      - node.name=opensearch-node2
+      - node.roles=cluster_manager,data,ingest
+      - discovery.seed_hosts=opensearch-node1,opensearch-node2,opensearch-ml1
+      - cluster.initial_cluster_manager_nodes=opensearch-node1,opensearch-node2
+      - bootstrap.memory_lock=true
+      - "OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m"
+      - OPENSEARCH_INITIAL_ADMIN_PASSWORD=${OPENSEARCH_INITIAL_ADMIN_PASSWORD}
+      - plugins.ml_commons.only_run_on_ml_node=true
+      - plugins.ml_commons.remote_inference.enabled=true
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+    volumes:
+      - opensearch-data2:/usr/share/opensearch/data
+    networks:
+      - opensearch-net
+
+  opensearch-ml1:
+    image: opensearchproject/opensearch:3.6.0
+    container_name: opensearch-ml1
+    environment:
+      - cluster.name=opensearch-cluster
+      - node.name=opensearch-ml1
+      - node.roles=ml
+      - discovery.seed_hosts=opensearch-node1,opensearch-node2,opensearch-ml1
+      - cluster.initial_cluster_manager_nodes=opensearch-node1,opensearch-node2
+      - bootstrap.memory_lock=true
+      - "OPENSEARCH_JAVA_OPTS=-Xms1g -Xmx1g"
+      - OPENSEARCH_INITIAL_ADMIN_PASSWORD=${OPENSEARCH_INITIAL_ADMIN_PASSWORD}
+      - plugins.ml_commons.only_run_on_ml_node=true
+      - plugins.ml_commons.remote_inference.enabled=true
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+    volumes:
+      - opensearch-ml1-data:/usr/share/opensearch/data
+    networks:
+      - opensearch-net
+
+  opensearch-dashboards:
+    image: opensearchproject/opensearch-dashboards:3.6.0
+    container_name: opensearch-dashboards
+    depends_on:
+      - opensearch-node1
+      - opensearch-node2
+    ports:
+      - "5601:5601"
+    expose:
+      - "5601"
+    environment:
+      OPENSEARCH_HOSTS: '["https://opensearch-node1:9200","https://opensearch-node2:9200"]'
+      OPENSEARCH_SSL_VERIFICATIONMODE: none
+      OPENSEARCH_USERNAME: ${DASHBOARDS_USERNAME}
+      OPENSEARCH_PASSWORD: ${DASHBOARDS_PASSWORD}
+    volumes:
+    - ./opensearch_dashboards.yml:/usr/share/opensearch-dashboards/config/opensearch_dashboards.yml:ro
+    networks:
+      - opensearch-net
+
+volumes:
+  opensearch-data1:
+  opensearch-data2:
+  opensearch-ml1-data:
+
+networks:
+  opensearch-net:

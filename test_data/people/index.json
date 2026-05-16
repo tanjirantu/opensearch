@@ -1,0 +1,1807 @@
+{
+	"people": [
+		{
+			"personUid": "e427344c-8af2-447f-9bff-d95672fba93a",
+			"tenantUid": "skillmatchcv",
+			"profileStatus": "active",
+			"visibility": "public",
+
+			"fullName": "Tanjir Antu",
+			"headline": "Software Engineer",
+			"summary": "Software Engineer experienced in TypeScript, React.js, Next.js, Node.js, AWS, CI/CD, Docker, Redis, RabbitMQ, and real-time systems.",
+
+			"contact": {
+				"email": "tanjirantu@gmail.com",
+				"phone": "+8801727711935",
+				"linkedinUrl": "https://linkedin.com/in/tanjir-antu",
+				"githubUrl": "https://github.com/tanjirantu"
+			},
+
+			"location": {
+				"country": "Bangladesh",
+				"countryCode": "BD",
+				"city": "Jessore",
+				"postalCode": "7460",
+				"remotePreference": "remote",
+				"willingToRelocate": false
+			},
+
+			"jobPreferences": {
+				"desiredTitles": [
+					"Software Engineer",
+					"Full Stack Developer",
+					"Backend Developer",
+					"Frontend Developer"
+				],
+				"jobCategories": ["software_engineering", "web_development"],
+				"employmentTypes": ["full_time", "part_time", "contract"],
+				"seniority": "mid_senior",
+				"openToRemote": true,
+				"openToOnsite": false,
+				"openToHybrid": true
+			},
+
+			"availability": {
+				"status": "available_for_opportunity",
+				"noticePeriodDays": 30,
+				"weeklyHoursMin": 20,
+				"weeklyHoursMax": 40,
+				"shiftPreferences": ["day", "flexible"]
+			},
+
+			"compensation": {
+				"currency": "USD",
+				"hourlyRateMin": 0,
+				"hourlyRateMax": 0,
+				"feeType": "hourly"
+			},
+
+			"skills": [
+				{
+					"name": "TypeScript",
+					"normalizedName": "typescript",
+					"category": "programming_language",
+					"type": "technical",
+					"proficiency": "advanced",
+					"yearsExperience": 4,
+					"verified": false
+				},
+				{
+					"name": "React.js",
+					"normalizedName": "react.js",
+					"category": "frontend",
+					"type": "technical",
+					"proficiency": "advanced",
+					"yearsExperience": 4,
+					"verified": false
+				},
+				{
+					"name": "Node.js",
+					"normalizedName": "node.js",
+					"category": "backend",
+					"type": "technical",
+					"proficiency": "advanced",
+					"yearsExperience": 4,
+					"verified": false
+				},
+				{
+					"name": "Docker",
+					"normalizedName": "docker",
+					"category": "devops",
+					"type": "technical",
+					"proficiency": "intermediate",
+					"yearsExperience": 3,
+					"verified": false
+				}
+			],
+
+			"skillNames": [
+				"typescript",
+				"react.js",
+				"next.js",
+				"redux",
+				"node.js",
+				"nosql",
+				"redis",
+				"rabbitmq",
+				"docker",
+				"socket.io",
+				"github actions",
+				"jenkins",
+				"aws"
+			],
+
+			"skillCategories": [
+				"programming_language",
+				"frontend",
+				"backend",
+				"database",
+				"devops",
+				"cloud",
+				"ci_cd"
+			],
+
+			"experience": [
+				{
+					"title": "Software Engineer",
+					"company": "SourceEazy",
+					"employmentType": "full_time",
+					"location": "remote",
+					"startDate": "2020-12-01",
+					"isCurrent": true,
+					"description": "Built 2D product designer tool, LogoFX artwork transformation feature, payment logic, CI/CD, and AWS deployment.",
+					"responsibilities": "Built product design tools, improved website performance, handled complex payment logic, implemented GitHub Actions CI/CD, and managed AWS services.",
+					"tools": [
+						"typescript",
+						"react.js",
+						"node.js",
+						"aws",
+						"github actions"
+					],
+					"industries": ["ecommerce", "promotional_products"]
+				},
+				{
+					"title": "Software Engineer",
+					"company": "Walton",
+					"employmentType": "part_time",
+					"location": "remote",
+					"startDate": "2020-08-01",
+					"endDate": "2021-01-01",
+					"isCurrent": false,
+					"description": "Built customer website, admin website, ordering service frontend and backend API.",
+					"tools": ["react.js", "node.js"],
+					"industries": ["ecommerce"]
+				},
+				{
+					"title": "Software Engineer",
+					"company": "Audacity IT Solutions Ltd.",
+					"employmentType": "full_time",
+					"startDate": "2019-12-01",
+					"endDate": "2020-11-01",
+					"isCurrent": false,
+					"description": "Built backend for real-time B2B platform, messaging service, deployment automation, and podcast mobile app API.",
+					"tools": ["node.js", "docker", "jenkins", "socket.io"],
+					"industries": ["b2b", "media"]
+				}
+			],
+
+			"education": [
+				{
+					"degree": "BSc in Computer Science",
+					"fieldOfStudy": "computer science",
+					"institution": "American International University - Bangladesh",
+					"startYear": 2014,
+					"endYear": 2018
+				}
+			],
+
+			"projects": [
+				{
+					"name": "Java Servlet Web Framework",
+					"description": "A Java Servlet web framework that solves routing by redirecting HTTP requests to controllers mapped in XML.",
+					"tools": ["java", "servlet", "xml"]
+				},
+				{
+					"name": "Geo-location Property Rent Application",
+					"description": "Property rent application using Google Maps API.",
+					"tools": ["google maps api"]
+				}
+			],
+
+			"industries": ["ecommerce", "promotional_products", "b2b", "media"],
+
+			"tags": [
+				"software engineer",
+				"full stack",
+				"remote",
+				"typescript",
+				"react",
+				"node.js"
+			],
+
+			"totalExperienceMonths": 76,
+
+			"searchText": "Tanjir Antu Software Engineer TypeScript React.js Next.js Redux Node.js NoSQL Redis RabbitMQ Docker Socket.io GitHub Actions Jenkins AWS 2D product designer payment logic CI/CD Amazon Web Services real-time B2B platform messaging service RESTful API podcast mobile application e-commerce promotional products.",
+
+			"createdAt": "2026-05-13T00:00:00Z",
+			"updatedAt": "2026-05-13T00:00:00Z",
+			"lastActiveAt": "2026-05-13T00:00:00Z",
+			"profileCompleteness": 0.86
+		},
+		{
+			"personUid": "person_mohammad_fayaz_zian",
+			"tenantUid": "tenant_default",
+			"profileStatus": "active",
+			"profileType": "candidate",
+			"visibility": "private",
+			"fullName": "Mohammad Fayaz Zian",
+			"headline": "Technical Officer | Marketing Operations | Research & Analytics",
+			"summary": "Experienced in the software development life cycle, Agile and Scrum methodologies, requirements analysis, marketing operations, qualitative research, and stakeholder communication across cross-functional environments.",
+			"contact": {
+				"email": "zianmohammad18@gmail.com",
+				"phone": "+8801826666617",
+				"linkedinUrl": "https://linkedin.com/in/mohammadzian18/",
+				"githubUrl": "https://github.com/Zian18",
+				"portfolioUrl": "https://rb.gy/qmhgao"
+			},
+			"location": {
+				"country": "Bangladesh",
+				"countryCode": "BD",
+				"city": "Dhaka",
+				"district": "Dhaka",
+				"state": "Dhaka",
+				"postalCode": null,
+				"geo": null,
+				"remotePreference": null,
+				"willingToRelocate": null
+			},
+			"jobPreferences": {
+				"desiredTitles": [
+					"Technical Officer",
+					"Business Analyst",
+					"Marketing Operations Specialist",
+					"Research Associate",
+					"Data Analyst"
+				],
+				"jobCategories": [
+					"business_analysis",
+					"marketing",
+					"research",
+					"data_analysis",
+					"software_development"
+				],
+				"employmentTypes": [],
+				"seniority": "junior_mid",
+				"openToRemote": null,
+				"openToOnsite": null,
+				"openToHybrid": null
+			},
+			"availability": {
+				"status": null,
+				"availableFrom": null,
+				"noticePeriodDays": null,
+				"weeklyHoursMin": null,
+				"weeklyHoursMax": null,
+				"shiftPreferences": []
+			},
+			"compensation": {
+				"currency": null,
+				"hourlyRateMin": null,
+				"hourlyRateMax": null,
+				"monthlySalaryMin": null,
+				"monthlySalaryMax": null,
+				"feeType": null
+			},
+			"skills": [
+				{
+					"name": "JavaScript",
+					"normalizedName": "javascript",
+					"category": "programming_language",
+					"type": "hard_skill",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "HTML/CSS",
+					"normalizedName": "html_css",
+					"category": "frontend",
+					"type": "hard_skill",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "SQL",
+					"normalizedName": "sql",
+					"category": "database",
+					"type": "hard_skill",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Python",
+					"normalizedName": "python",
+					"category": "programming_language",
+					"type": "hard_skill",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Node.js",
+					"normalizedName": "nodejs",
+					"category": "backend",
+					"type": "hard_skill",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "MERN",
+					"normalizedName": "mern",
+					"category": "full_stack",
+					"type": "hard_skill",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "REST API",
+					"normalizedName": "rest_api",
+					"category": "backend",
+					"type": "hard_skill",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Microsoft Office Suite",
+					"normalizedName": "microsoft_office_suite",
+					"category": "productivity_tool",
+					"type": "hard_skill",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Adobe Photoshop",
+					"normalizedName": "adobe_photoshop",
+					"category": "design_tool",
+					"type": "hard_skill",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Google Analytics",
+					"normalizedName": "google_analytics",
+					"category": "analytics_tool",
+					"type": "hard_skill",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Google Ads",
+					"normalizedName": "google_ads",
+					"category": "marketing_tool",
+					"type": "hard_skill",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "STATA",
+					"normalizedName": "stata",
+					"category": "data_analysis_tool",
+					"type": "hard_skill",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Microsoft Visual Studio Code",
+					"normalizedName": "microsoft_visual_studio_code",
+					"category": "development_tool",
+					"type": "hard_skill",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "WordPress",
+					"normalizedName": "wordpress",
+					"category": "cms",
+					"type": "hard_skill",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Power BI",
+					"normalizedName": "power_bi",
+					"category": "analytics_tool",
+					"type": "hard_skill",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Agile",
+					"normalizedName": "agile",
+					"category": "methodology",
+					"type": "hard_skill",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Scrum",
+					"normalizedName": "scrum",
+					"category": "methodology",
+					"type": "hard_skill",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Marketing Operations",
+					"normalizedName": "marketing_operations",
+					"category": "marketing",
+					"type": "hard_skill",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Qualitative Research",
+					"normalizedName": "qualitative_research",
+					"category": "research",
+					"type": "hard_skill",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Data Analysis",
+					"normalizedName": "data_analysis",
+					"category": "data_analysis",
+					"type": "hard_skill",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Requirements Analysis",
+					"normalizedName": "requirements_analysis",
+					"category": "business_analysis",
+					"type": "hard_skill",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				}
+			],
+			"skillNames": [
+				"Adobe Photoshop",
+				"Agile",
+				"Data Analysis",
+				"Google Ads",
+				"Google Analytics",
+				"HTML/CSS",
+				"JavaScript",
+				"MERN",
+				"Marketing Operations",
+				"Microsoft Office Suite",
+				"Microsoft Visual Studio Code",
+				"Node.js",
+				"Power BI",
+				"Python",
+				"Qualitative Research",
+				"REST API",
+				"Requirements Analysis",
+				"SQL",
+				"STATA",
+				"Scrum",
+				"WordPress"
+			],
+			"skillCategories": [
+				"analytics_tool",
+				"backend",
+				"business_analysis",
+				"cms",
+				"data_analysis",
+				"data_analysis_tool",
+				"database",
+				"design_tool",
+				"development_tool",
+				"frontend",
+				"full_stack",
+				"marketing",
+				"marketing_tool",
+				"methodology",
+				"productivity_tool",
+				"programming_language",
+				"research"
+			],
+			"experience": [
+				{
+					"title": "Technical Officer",
+					"company": "Change Associates",
+					"employmentType": null,
+					"location": "Dhaka, Bangladesh",
+					"startDate": "2020-03-01",
+					"endDate": "2020-07-01",
+					"isCurrent": false,
+					"durationMonths": 5,
+					"description": "Supported learner identification from RMG worker groups and contributed to nutrition training and app-related requirements work.",
+					"responsibilities": [
+						"Provided support to identify learners from RMG worker groups for nutrition training.",
+						"Assisted with baseline surveys and impact assessments.",
+						"Prepared and updated requirements analysis, functional specifications, and model templates for a nutrition-based app."
+					],
+					"tools": [],
+					"industries": ["rmg", "training", "health", "software"]
+				},
+				{
+					"title": "Marketing Operations Specialist",
+					"company": "Therap Services LLC Bangladesh Ltd",
+					"employmentType": null,
+					"location": "Bangladesh",
+					"startDate": "2019-09-01",
+					"endDate": "2020-02-01",
+					"isCurrent": false,
+					"durationMonths": 6,
+					"description": "Coordinated campaigns, communication streams, reporting, proposals, and product/user research for an LSM platform.",
+					"responsibilities": [
+						"Coordinated campaigns and communication streams for target segments.",
+						"Used analytics to measure and report marketing campaigns and manage user acquisitions.",
+						"Prepared proposals, presentations, and marketing materials.",
+						"Developed cases and identified business needs during the design of an LSM platform."
+					],
+					"tools": ["google_analytics"],
+					"industries": ["marketing", "software"]
+				},
+				{
+					"title": "Qualitative Research Associate",
+					"company": "Kantar Millward Brown",
+					"employmentType": null,
+					"location": "Bangladesh",
+					"startDate": "2017-09-01",
+					"endDate": "2018-03-01",
+					"isCurrent": false,
+					"durationMonths": 7,
+					"description": "Conducted qualitative market research and trained field research teams.",
+					"responsibilities": [
+						"Analyzed usage patterns and customer behavior across rural, urban, concept, and ideation studies.",
+						"Built field research teams by providing training and guidance on data analysis and implications."
+					],
+					"tools": [],
+					"industries": ["market_research", "consumer_research"]
+				},
+				{
+					"title": "Accounts & Finance Assistant",
+					"company": "Toru Inclusive Innovation",
+					"employmentType": "part_time",
+					"location": "Bangladesh",
+					"startDate": "2016-08-01",
+					"endDate": "2017-04-01",
+					"isCurrent": false,
+					"durationMonths": 9,
+					"description": "Part-time finance and operations support role.",
+					"responsibilities": [
+						"Assisted in maintaining financial databases and retrieving information as needed.",
+						"Assisted with maintaining operational documents for day-to-day work."
+					],
+					"tools": [],
+					"industries": ["finance", "operations"]
+				},
+				{
+					"title": "Field Research",
+					"company": "Kantar Millward Brown",
+					"employmentType": "part_time",
+					"location": "Bangladesh",
+					"startDate": "2016-01-01",
+					"endDate": "2017-08-01",
+					"isCurrent": false,
+					"durationMonths": 20,
+					"description": "Part-time field research role supporting consumer studies.",
+					"responsibilities": [
+						"Conducted focus groups, observations, and ethnographic research methods.",
+						"Provided ad-hoc and regular analysis and reports to support research studies."
+					],
+					"tools": [],
+					"industries": ["market_research", "consumer_research"]
+				}
+			],
+			"education": [
+				{
+					"degree": "Bachelor of Social Science",
+					"fieldOfStudy": "Economics",
+					"institution": "BRAC University",
+					"startYear": 2013,
+					"endYear": 2017
+				},
+				{
+					"degree": "General Certificate of Education; GCE A Level",
+					"fieldOfStudy": null,
+					"institution": "Private under British Council",
+					"startYear": 2011,
+					"endYear": 2012
+				},
+				{
+					"degree": "General Certificate of Education; GCE O Level",
+					"fieldOfStudy": null,
+					"institution": "Bangladesh International School",
+					"startYear": 2010,
+					"endYear": 2011
+				}
+			],
+			"certifications": [
+				{
+					"name": "Google Digital Garage elementary course on digital marketing",
+					"issuer": "Google Digital Garage",
+					"issuedAt": null,
+					"expiresAt": null,
+					"licenseNumber": null
+				},
+				{
+					"name": "Introductory course on website data analytics",
+					"issuer": "Google Analytics Academy",
+					"issuedAt": null,
+					"expiresAt": null,
+					"licenseNumber": null
+				}
+			],
+			"languages": [
+				{
+					"name": "Bengali",
+					"proficiency": null
+				},
+				{
+					"name": "English",
+					"proficiency": null
+				}
+			],
+			"projects": [
+				{
+					"name": "To-do List Web App",
+					"description": "Created a to-do list web application.",
+					"tools": ["html", "css", "javascript"],
+					"url": null
+				},
+				{
+					"name": "Weather Web Application",
+					"description": "Created a weather web application using HTML, CSS, JavaScript, and OpenWeatherMap API.",
+					"tools": [
+						"html",
+						"css",
+						"javascript",
+						"openweathermap_api"
+					],
+					"url": null
+				},
+				{
+					"name": "REST API",
+					"description": "Built a REST API using Node.js.",
+					"tools": ["nodejs", "rest_api"],
+					"url": null
+				},
+				{
+					"name": "Hotel Booking with MERN",
+					"description": "Worked on a hotel booking project using the MERN stack.",
+					"tools": ["mongodb", "expressjs", "react", "nodejs"],
+					"url": null
+				}
+			],
+			"totalExperienceMonths": 47,
+			"industries": [
+				"software",
+				"marketing",
+				"market_research",
+				"data_analysis",
+				"finance",
+				"rmg",
+				"health"
+			],
+			"tags": [
+				"agile",
+				"scrum",
+				"marketing_operations",
+				"research",
+				"analytics",
+				"requirements_analysis"
+			],
+			"searchText": "Mohammad Fayaz Zian Technical Officer Marketing Operations Specialist Qualitative Research Associate.\nExperience in software development life cycle, Agile, Scrum, requirements analysis, functional specifications, nutrition-based app model templates, marketing campaigns, analytics, proposals, market research, field research, data analysis, finance assistance.\nSkills: JavaScript, HTML/CSS, SQL, Python, Node.js, MERN, REST API, Microsoft Office Suite, Adobe Photoshop, Google Analytics, Google Ads, STATA, Microsoft Visual Studio Code, WordPress, Power BI.\nEducation: Bachelor of Social Science in Economics, BRAC University. Languages: Bengali, English.\nProjects: To-do list web app, Weather web application using HTML CSS JS and OpenWeatherMap API, REST API using Node.js, hotel booking with MERN.",
+			"profileEmbedding": null,
+			"createdAt": "2026-05-16T00:00:00.000Z",
+			"updatedAt": "2026-05-16T00:00:00.000Z",
+			"lastActiveAt": null,
+			"profileCompleteness": 0.86
+		},
+		{
+			"personUid": "person_abbas_uddin",
+			"tenantUid": "tenant_default",
+			"profileStatus": "active",
+			"profileType": "candidate",
+			"visibility": "private",
+			"fullName": "Abbas Uddin",
+			"headline": "Experienced Software Programmer",
+			"summary": "Analytical Software Programmer with advanced skills in complex programming tasks, testing, correcting, and revising web-based programs. Proficient in PHP/MySQL, HTML, and JavaScript with 9+ years of experience.",
+			"contact": {
+				"email": "abbasuddin@outlook.com",
+				"phone": "01964573188",
+				"linkedinUrl": "https://www.linkedin.com/in/abbasuddin/",
+				"githubUrl": null,
+				"portfolioUrl": null
+			},
+			"location": {
+				"country": "Bangladesh",
+				"countryCode": "BD",
+				"city": "Dhaka",
+				"district": "Keraniganj",
+				"state": "Dhaka",
+				"postalCode": "1310",
+				"geo": null,
+				"remotePreference": null,
+				"willingToRelocate": null
+			},
+			"jobPreferences": {
+				"desiredTitles": [
+					"Software Programmer",
+					"PHP Developer",
+					"Web Developer",
+					"Backend Developer",
+					"ERP Developer"
+				],
+				"jobCategories": [
+					"software_engineering",
+					"web_development",
+					"backend_development",
+					"erp_development",
+					"it_support"
+				],
+				"employmentTypes": [],
+				"seniority": "experienced",
+				"openToRemote": null,
+				"openToOnsite": null,
+				"openToHybrid": null
+			},
+			"availability": {
+				"status": null,
+				"availableFrom": null,
+				"noticePeriodDays": null,
+				"weeklyHoursMin": null,
+				"weeklyHoursMax": null,
+				"shiftPreferences": []
+			},
+			"compensation": {
+				"currency": null,
+				"hourlyRateMin": null,
+				"hourlyRateMax": null,
+				"monthlySalaryMin": null,
+				"monthlySalaryMax": null,
+				"feeType": null
+			},
+			"skills": [
+				{
+					"name": "Web Development",
+					"normalizedName": "web_development",
+					"category": "web_development",
+					"type": "hard_skill",
+					"proficiency": "Excellent",
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "HTML5/CSS & JS",
+					"normalizedName": "html5_css_&_js",
+					"category": "frontend",
+					"type": "hard_skill",
+					"proficiency": "Excellent",
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "PHP",
+					"normalizedName": "php",
+					"category": "programming_language",
+					"type": "hard_skill",
+					"proficiency": "Excellent",
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Java",
+					"normalizedName": "java",
+					"category": "programming_language",
+					"type": "hard_skill",
+					"proficiency": "Excellent",
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "ASP",
+					"normalizedName": "asp",
+					"category": "backend",
+					"type": "hard_skill",
+					"proficiency": "Excellent",
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Node.js",
+					"normalizedName": "nodejs",
+					"category": "backend",
+					"type": "hard_skill",
+					"proficiency": "Excellent",
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "jQuery",
+					"normalizedName": "jquery",
+					"category": "frontend",
+					"type": "hard_skill",
+					"proficiency": "Excellent",
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "PHP/MySQL",
+					"normalizedName": "php_mysql",
+					"category": "full_stack",
+					"type": "hard_skill",
+					"proficiency": "Excellent",
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "CodeIgniter",
+					"normalizedName": "codeigniter",
+					"category": "framework",
+					"type": "hard_skill",
+					"proficiency": "Excellent",
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Laravel",
+					"normalizedName": "laravel",
+					"category": "framework",
+					"type": "hard_skill",
+					"proficiency": "Excellent",
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Core PHP",
+					"normalizedName": "core_php",
+					"category": "backend",
+					"type": "hard_skill",
+					"proficiency": "Excellent",
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Adobe Photoshop",
+					"normalizedName": "adobe_photoshop",
+					"category": "design_tool",
+					"type": "hard_skill",
+					"proficiency": "Very Good",
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Adobe Illustrator",
+					"normalizedName": "adobe_illustrator",
+					"category": "design_tool",
+					"type": "hard_skill",
+					"proficiency": "Very Good",
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Microsoft Office",
+					"normalizedName": "microsoft_office",
+					"category": "productivity_tool",
+					"type": "hard_skill",
+					"proficiency": "Very Good",
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "MySQL",
+					"normalizedName": "mysql",
+					"category": "database",
+					"type": "hard_skill",
+					"proficiency": "Excellent",
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "PostgreSQL",
+					"normalizedName": "postgresql",
+					"category": "database",
+					"type": "hard_skill",
+					"proficiency": "Excellent",
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Oracle",
+					"normalizedName": "oracle",
+					"category": "database",
+					"type": "hard_skill",
+					"proficiency": "Excellent",
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "SQLite",
+					"normalizedName": "sqlite",
+					"category": "database",
+					"type": "hard_skill",
+					"proficiency": "Excellent",
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "MongoDB",
+					"normalizedName": "mongodb",
+					"category": "database",
+					"type": "hard_skill",
+					"proficiency": "Excellent",
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Redis",
+					"normalizedName": "redis",
+					"category": "database",
+					"type": "hard_skill",
+					"proficiency": "Excellent",
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Windows",
+					"normalizedName": "windows",
+					"category": "operating_system",
+					"type": "hard_skill",
+					"proficiency": "Very Good",
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Linux CentOS",
+					"normalizedName": "linux_centos",
+					"category": "operating_system",
+					"type": "hard_skill",
+					"proficiency": "Very Good",
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Ubuntu",
+					"normalizedName": "ubuntu",
+					"category": "operating_system",
+					"type": "hard_skill",
+					"proficiency": "Very Good",
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Mac OS Sierra",
+					"normalizedName": "mac_os_sierra",
+					"category": "operating_system",
+					"type": "hard_skill",
+					"proficiency": "Very Good",
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Microsoft Visual Studio 2017",
+					"normalizedName": "microsoft_visual_studio_2017",
+					"category": "development_tool",
+					"type": "hard_skill",
+					"proficiency": "Very Good",
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Adobe Dreamweaver",
+					"normalizedName": "adobe_dreamweaver",
+					"category": "development_tool",
+					"type": "hard_skill",
+					"proficiency": "Excellent",
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "NetBeans",
+					"normalizedName": "netbeans",
+					"category": "development_tool",
+					"type": "hard_skill",
+					"proficiency": "Very Good",
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Code::Blocks",
+					"normalizedName": "code::blocks",
+					"category": "development_tool",
+					"type": "hard_skill",
+					"proficiency": "Very Good",
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Eclipse",
+					"normalizedName": "eclipse",
+					"category": "development_tool",
+					"type": "hard_skill",
+					"proficiency": "Very Good",
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Oracle VirtualBox",
+					"normalizedName": "oracle_virtualbox",
+					"category": "hypervisor",
+					"type": "hard_skill",
+					"proficiency": "Excellent",
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "VMware",
+					"normalizedName": "vmware",
+					"category": "hypervisor",
+					"type": "hard_skill",
+					"proficiency": "Excellent",
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Hyper-V",
+					"normalizedName": "hyper-v",
+					"category": "hypervisor",
+					"type": "hard_skill",
+					"proficiency": "Excellent",
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Arduino UNO3",
+					"normalizedName": "arduino_uno3",
+					"category": "automation",
+					"type": "hard_skill",
+					"proficiency": "Very Good",
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Raspberry Pi 3",
+					"normalizedName": "raspberry_pi_3",
+					"category": "automation",
+					"type": "hard_skill",
+					"proficiency": "Very Good",
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "SEO",
+					"normalizedName": "seo",
+					"category": "digital_marketing",
+					"type": "hard_skill",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "ERP Development",
+					"normalizedName": "erp_development",
+					"category": "enterprise_software",
+					"type": "hard_skill",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Network Troubleshooting",
+					"normalizedName": "network_troubleshooting",
+					"category": "networking",
+					"type": "hard_skill",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				}
+			],
+			"skillNames": [
+				"ASP",
+				"Adobe Dreamweaver",
+				"Adobe Illustrator",
+				"Adobe Photoshop",
+				"Arduino UNO3",
+				"Code::Blocks",
+				"CodeIgniter",
+				"Core PHP",
+				"ERP Development",
+				"Eclipse",
+				"HTML5/CSS & JS",
+				"Hyper-V",
+				"Java",
+				"Laravel",
+				"Linux CentOS",
+				"Mac OS Sierra",
+				"Microsoft Office",
+				"Microsoft Visual Studio 2017",
+				"MongoDB",
+				"MySQL",
+				"NetBeans",
+				"Network Troubleshooting",
+				"Node.js",
+				"Oracle",
+				"Oracle VirtualBox",
+				"PHP",
+				"PHP/MySQL",
+				"PostgreSQL",
+				"Raspberry Pi 3",
+				"Redis",
+				"SEO",
+				"SQLite",
+				"Ubuntu",
+				"VMware",
+				"Web Development",
+				"Windows",
+				"jQuery"
+			],
+			"skillCategories": [
+				"automation",
+				"backend",
+				"database",
+				"design_tool",
+				"development_tool",
+				"digital_marketing",
+				"enterprise_software",
+				"framework",
+				"frontend",
+				"full_stack",
+				"hypervisor",
+				"networking",
+				"operating_system",
+				"productivity_tool",
+				"programming_language",
+				"web_development"
+			],
+			"experience": [
+				{
+					"title": "Software Programmer",
+					"company": "AKIJ Online Ltd.",
+					"employmentType": null,
+					"location": "Dhaka, Bangladesh",
+					"startDate": "2015-01-01",
+					"endDate": null,
+					"isCurrent": true,
+					"durationMonths": null,
+					"description": "Created, delivered, and maintained scalable architecture and ERP/web applications using PHP/MySQL.",
+					"responsibilities": [
+						"Created, delivered, and maintained scalable system architecture for high-availability internet sites and internal applications.",
+						"Wrote ERP applications based on PHP/MySQL in hybrid architecture for industry.",
+						"Monitored and updated back-end data by communicating between PHP clients and MySQL.",
+						"Directed ERP software design and development across a 1-10 member team.",
+						"Coached interns and new employees.",
+						"Coded 10+ websites using PHP/MySQL.",
+						"Built, tested, and deployed scalable, highly available, modular software products."
+					],
+					"tools": ["php", "mysql"],
+					"industries": ["software", "erp", "web_development"]
+				},
+				{
+					"title": "Outsource Staff",
+					"company": "UpWork (formally ODesk)",
+					"employmentType": null,
+					"location": null,
+					"startDate": "2010-07-01",
+					"endDate": "2015-06-01",
+					"isCurrent": false,
+					"durationMonths": 60,
+					"description": "Worked on website portals, social media pages, SEO strategies, product upgrades, and web development.",
+					"responsibilities": [
+						"Helped clients develop website portals and social media pages.",
+						"Built, implemented, and updated SEO strategies.",
+						"Collected requirements from customers and business partners for product upgrades and new product development.",
+						"Created dynamic websites and eliminated website bugs.",
+						"Submitted weekly progress reports against KPI objectives."
+					],
+					"tools": [],
+					"industries": [
+						"freelance",
+						"web_development",
+						"digital_marketing"
+					]
+				},
+				{
+					"title": "IT Executive",
+					"company": "Local IT Firm",
+					"employmentType": null,
+					"location": "Jessore, Bangladesh",
+					"startDate": "2009-07-01",
+					"endDate": "2010-07-01",
+					"isCurrent": false,
+					"durationMonths": 12,
+					"description": "Handled computer hardware, network systems, server, and device support.",
+					"responsibilities": [
+						"Identified computer hardware and network system issues and performed troubleshooting.",
+						"Supported network design, reevaluation, and optimization.",
+						"Monitored network capacity and performance and resolved complex network problems.",
+						"Maintained servers, computers, printers, cables, and other equipment."
+					],
+					"tools": [],
+					"industries": ["it_support", "networking"]
+				}
+			],
+			"education": [
+				{
+					"degree": "Bachelor of Science",
+					"fieldOfStudy": "Computer Science and Engineering",
+					"institution": "European University of Bangladesh",
+					"startYear": 2018,
+					"endYear": null
+				},
+				{
+					"degree": "Diploma",
+					"fieldOfStudy": "Computer Science and Application",
+					"institution": "Bangladesh Open University",
+					"startYear": 2015,
+					"endYear": 2017
+				},
+				{
+					"degree": "H.S.C.",
+					"fieldOfStudy": "Arts",
+					"institution": "Jessore Government City College",
+					"startYear": 2010,
+					"endYear": 2011
+				}
+			],
+			"certifications": [
+				{
+					"name": "Cisco Certified Network Associates (CCNA)",
+					"issuer": "Cisco",
+					"issuedAt": "2018-01-01",
+					"expiresAt": null,
+					"licenseNumber": null
+				},
+				{
+					"name": "Diploma in Multimedia Graphic Design",
+					"issuer": null,
+					"issuedAt": "2014-02-01",
+					"expiresAt": null,
+					"licenseNumber": null
+				}
+			],
+			"languages": [
+				{
+					"name": "Bengali",
+					"proficiency": "Native"
+				},
+				{
+					"name": "English",
+					"proficiency": "Superior"
+				},
+				{
+					"name": "Arabic",
+					"proficiency": "Intermediate"
+				}
+			],
+			"projects": [],
+			"totalExperienceMonths": 108,
+			"industries": [
+				"software",
+				"web_development",
+				"erp",
+				"digital_marketing",
+				"it_support",
+				"networking"
+			],
+			"tags": [
+				"php",
+				"mysql",
+				"erp",
+				"web_development",
+				"full_stack",
+				"seo",
+				"networking"
+			],
+			"searchText": "Abbas Uddin Experienced Software Programmer. Analytical Software Programmer with advanced skills performing complex programming tasks, testing, correcting and revising web-based programs.\nExperience includes Software Programmer at AKIJ Online Ltd, Outsource Staff at UpWork/ODesk, and IT Executive at a local IT firm in Jessore.\nSkills: web development, HTML5, CSS, JavaScript, PHP, Java, ASP, Node.js, jQuery, PHP/MySQL, CodeIgniter, Laravel, Core PHP, MySQL, PostgreSQL, Oracle, SQLite, MongoDB, Redis, Linux, Ubuntu, Windows, Visual Studio, Dreamweaver, NetBeans, Code::Blocks, Eclipse, VirtualBox, VMware, Hyper-V, Arduino, Raspberry Pi, SEO, ERP development, network troubleshooting.\nEducation: Bachelor of Science in CSE, European University of Bangladesh; Diploma in Computer Science and Application, Bangladesh Open University. Certifications: CCNA, Diploma in Multimedia Graphic Design. Languages: Bengali, English, Arabic.",
+			"profileEmbedding": null,
+			"createdAt": "2026-05-16T00:00:00.000Z",
+			"updatedAt": "2026-05-16T00:00:00.000Z",
+			"lastActiveAt": null,
+			"profileCompleteness": 0.88
+		},
+		{
+			"personUid": "person_kamon_ahmed",
+			"tenantUid": "tenant_default",
+			"profileStatus": "active",
+			"profileType": "candidate",
+			"visibility": "private",
+			"fullName": "Kamon Ahmed",
+			"headline": "Junior Front-End React.js Developer",
+			"summary": "Junior front-end React.js developer with hands-on project experience using JavaScript, React, Redux, Context API, Node.js, REST API, MongoDB, Bootstrap, Firebase, Heroku, Netlify, and Postman.",
+			"contact": {
+				"email": "ahmedkamon3@gmail.com",
+				"phone": "01878278574",
+				"linkedinUrl": null,
+				"githubUrl": null,
+				"portfolioUrl": null
+			},
+			"location": {
+				"country": "Bangladesh",
+				"countryCode": "BD",
+				"city": "Rangamati",
+				"district": "Rangamati",
+				"state": null,
+				"postalCode": null,
+				"geo": null,
+				"remotePreference": null,
+				"willingToRelocate": null
+			},
+			"jobPreferences": {
+				"desiredTitles": [
+					"Junior Front-End Developer",
+					"React.js Developer",
+					"Frontend Developer",
+					"Junior Web Developer"
+				],
+				"jobCategories": [
+					"software_engineering",
+					"frontend_development",
+					"web_development"
+				],
+				"employmentTypes": [],
+				"seniority": "junior",
+				"openToRemote": null,
+				"openToOnsite": null,
+				"openToHybrid": null
+			},
+			"availability": {
+				"status": null,
+				"availableFrom": null,
+				"noticePeriodDays": null,
+				"weeklyHoursMin": null,
+				"weeklyHoursMax": null,
+				"shiftPreferences": []
+			},
+			"compensation": {
+				"currency": null,
+				"hourlyRateMin": null,
+				"hourlyRateMax": null,
+				"monthlySalaryMin": null,
+				"monthlySalaryMax": null,
+				"feeType": null
+			},
+			"skills": [
+				{
+					"name": "JavaScript",
+					"normalizedName": "javascript",
+					"category": "programming_language",
+					"type": "hard_skill",
+					"proficiency": "Comfortable",
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "ES6",
+					"normalizedName": "es6",
+					"category": "frontend",
+					"type": "hard_skill",
+					"proficiency": "Comfortable",
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "React",
+					"normalizedName": "react",
+					"category": "frontend",
+					"type": "hard_skill",
+					"proficiency": "Comfortable",
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Node.js",
+					"normalizedName": "nodejs",
+					"category": "backend",
+					"type": "hard_skill",
+					"proficiency": "Comfortable",
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "REST API",
+					"normalizedName": "rest_api",
+					"category": "backend",
+					"type": "hard_skill",
+					"proficiency": "Comfortable",
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Material-UI",
+					"normalizedName": "material-ui",
+					"category": "frontend",
+					"type": "hard_skill",
+					"proficiency": "Comfortable",
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "MongoDB",
+					"normalizedName": "mongodb",
+					"category": "database",
+					"type": "hard_skill",
+					"proficiency": "Comfortable",
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Bootstrap 4",
+					"normalizedName": "bootstrap_4",
+					"category": "frontend",
+					"type": "hard_skill",
+					"proficiency": "Comfortable",
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "React Bootstrap",
+					"normalizedName": "react_bootstrap",
+					"category": "frontend",
+					"type": "hard_skill",
+					"proficiency": "Comfortable",
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "JSON",
+					"normalizedName": "json",
+					"category": "data_format",
+					"type": "hard_skill",
+					"proficiency": "Comfortable",
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "HTML",
+					"normalizedName": "html",
+					"category": "frontend",
+					"type": "hard_skill",
+					"proficiency": "Comfortable",
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "CSS",
+					"normalizedName": "css",
+					"category": "frontend",
+					"type": "hard_skill",
+					"proficiency": "Comfortable",
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Photoshop",
+					"normalizedName": "photoshop",
+					"category": "design_tool",
+					"type": "hard_skill",
+					"proficiency": "Comfortable",
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Redux",
+					"normalizedName": "redux",
+					"category": "frontend",
+					"type": "hard_skill",
+					"proficiency": "Familiar",
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "TypeScript",
+					"normalizedName": "typescript",
+					"category": "programming_language",
+					"type": "hard_skill",
+					"proficiency": "Familiar",
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Express.js",
+					"normalizedName": "expressjs",
+					"category": "backend",
+					"type": "hard_skill",
+					"proficiency": "Familiar",
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Illustrator",
+					"normalizedName": "illustrator",
+					"category": "design_tool",
+					"type": "hard_skill",
+					"proficiency": "Familiar",
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "NPM",
+					"normalizedName": "npm",
+					"category": "development_tool",
+					"type": "hard_skill",
+					"proficiency": "Familiar",
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "VS Code",
+					"normalizedName": "vs_code",
+					"category": "development_tool",
+					"type": "hard_skill",
+					"proficiency": "Familiar",
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Notepad++",
+					"normalizedName": "notepadplusplus",
+					"category": "development_tool",
+					"type": "hard_skill",
+					"proficiency": "Familiar",
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Chrome DevTools",
+					"normalizedName": "chrome_devtools",
+					"category": "development_tool",
+					"type": "hard_skill",
+					"proficiency": "Familiar",
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Heroku",
+					"normalizedName": "heroku",
+					"category": "deployment_tool",
+					"type": "hard_skill",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Netlify",
+					"normalizedName": "netlify",
+					"category": "deployment_tool",
+					"type": "hard_skill",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Firebase",
+					"normalizedName": "firebase",
+					"category": "backend_service",
+					"type": "hard_skill",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Postman",
+					"normalizedName": "postman",
+					"category": "api_tool",
+					"type": "hard_skill",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Context API",
+					"normalizedName": "context_api",
+					"category": "frontend",
+					"type": "hard_skill",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "React Reducer",
+					"normalizedName": "react_reducer",
+					"category": "frontend",
+					"type": "hard_skill",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				}
+			],
+			"skillNames": [
+				"Bootstrap 4",
+				"CSS",
+				"Chrome DevTools",
+				"Context API",
+				"ES6",
+				"Express.js",
+				"Firebase",
+				"HTML",
+				"Heroku",
+				"Illustrator",
+				"JSON",
+				"JavaScript",
+				"Material-UI",
+				"MongoDB",
+				"NPM",
+				"Netlify",
+				"Node.js",
+				"Notepad++",
+				"Photoshop",
+				"Postman",
+				"REST API",
+				"React",
+				"React Bootstrap",
+				"React Reducer",
+				"Redux",
+				"TypeScript",
+				"VS Code"
+			],
+			"skillCategories": [
+				"api_tool",
+				"backend",
+				"backend_service",
+				"data_format",
+				"database",
+				"deployment_tool",
+				"design_tool",
+				"development_tool",
+				"frontend",
+				"programming_language"
+			],
+			"experience": [],
+			"education": [
+				{
+					"degree": "Bachelor of Business Studies",
+					"fieldOfStudy": "Business Studies",
+					"institution": "Rangamati Govt. College and University",
+					"startYear": null,
+					"endYear": null
+				},
+				{
+					"degree": "Complete Web Development Course",
+					"fieldOfStudy": "Web Development",
+					"institution": "Programming Hero",
+					"startYear": null,
+					"endYear": null
+				}
+			],
+			"certifications": [
+				{
+					"name": "Black Belt",
+					"issuer": "Programming Hero",
+					"issuedAt": null,
+					"expiresAt": null,
+					"licenseNumber": null
+				}
+			],
+			"languages": [],
+			"projects": [
+				{
+					"name": "Gents Parlour",
+					"description": "Full-stack MARN/MERN-style project with admin and regular user options, protected order flow requiring mobile number and address, responsive UI, transition effects, and dynamic services and reviews.",
+					"tools": ["react", "nodejs", "mongodb", "rest_api"],
+					"url": null
+				},
+				{
+					"name": "Dev Town",
+					"description": "Front-end project created with React Redux. Users can create a team with developers, add or remove developers from the cart, and see adjusted cart pricing on a responsive UI.",
+					"tools": ["react", "redux", "javascript", "html", "css"],
+					"url": null
+				},
+				{
+					"name": "Mobile Shopping Cart",
+					"description": "Front-end shopping cart project created with Context API and reducer. Supports item increment/decrement, total price update, responsive UI, and React custom scrollbar.",
+					"tools": ["react", "context_api", "reducer", "javascript"],
+					"url": null
+				}
+			],
+			"totalExperienceMonths": null,
+			"industries": [
+				"software",
+				"frontend_development",
+				"web_development"
+			],
+			"tags": [
+				"junior_frontend",
+				"react",
+				"javascript",
+				"redux",
+				"context_api",
+				"mern",
+				"web_development"
+			],
+			"searchText": "Kamon Ahmed Junior front-end React.js developer based in Rangamati, Bangladesh.\nSkills: JavaScript, ES6, React, Node.js, REST API, Material-UI, MongoDB, Bootstrap4, React Bootstrap, JSON, HTML, CSS, Photoshop, Redux, TypeScript, Express.js, Illustrator, NPM, VS Code, Notepad++, Chrome DevTools, Heroku, Netlify, Firebase, Postman.\nProjects: Gents Parlour full-stack project with admin and regular user roles, protected order flow, responsive UI, transition effects, dynamic services and reviews. Dev Town frontend React Redux project to create a team with developers and cart pricing. Mobile Shopping Cart frontend project using Context API and reducer with responsive UI and custom scrollbar.\nEducation: Bachelor of Business Studies, Rangamati Govt College and University; Programming Hero complete web development course. Award: Black Belt.",
+			"profileEmbedding": null,
+			"createdAt": "2026-05-16T00:00:00.000Z",
+			"updatedAt": "2026-05-16T00:00:00.000Z",
+			"lastActiveAt": null,
+			"profileCompleteness": 0.78
+		}
+	]
+}

@@ -1,0 +1,28 @@
+# Local environment and secrets
+.env
+.env.*
+!.env.example
+
+# Docker Compose local overrides and runtime data
+docker-compose.override.yml
+data/
+opensearch-data*/
+opensearch-ml*-data/
+
+# Logs and temporary files
+*.log
+logs/
+tmp/
+temp/
+
+# Editor and OS files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Local agent/tooling state
+.codex/
+.agents/

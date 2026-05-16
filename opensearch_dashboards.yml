@@ -1,0 +1,12 @@
+data_source.enabled: true
+workspace.enabled: true
+explore.enabled: true
+
+server.name: opensearch_dashboards
+server.host: "0.0.0.0"
+server.ssl.enabled: false
+opensearch.requestHeadersWhitelist: ["securitytenant","Authorization"]
+opensearch_security.multitenancy.enabled: true
+opensearch_security.multitenancy.tenants.preferred: ["Private", "Global"]
+opensearch_security.readonly_mode.roles: ["kibana_read_only"]
+ml_commons_dashboards.enabled: true
