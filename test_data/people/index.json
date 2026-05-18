@@ -1802,6 +1802,1352 @@
 			"updatedAt": "2026-05-16T00:00:00.000Z",
 			"lastActiveAt": null,
 			"profileCompleteness": 0.78
+		},
+		{
+			"personUid": "person_ruhina_akter",
+			"tenantUid": null,
+			"profileStatus": "active",
+			"profileType": "candidate",
+			"visibility": "private",
+			"fullName": "Ruhina Akter",
+			"headline": "Senior SQA Engineer",
+			"summary": "Looking to secure a Senior SQA Engineer role with opportunities for growth and expanding learning.",
+			"contact": {
+				"email": "ruhinaakter.ruma@gmail.com",
+				"phone": "+8801962779835",
+				"linkedinUrl": null,
+				"githubUrl": null,
+				"portfolioUrl": null
+			},
+			"location": {
+				"country": "Bangladesh",
+				"countryCode": "BD",
+				"city": "Dhaka",
+				"district": null,
+				"state": "Dhaka",
+				"postalCode": "1207",
+				"geo": null,
+				"remotePreference": null,
+				"willingToRelocate": null
+			},
+			"jobPreferences": {
+				"desiredTitles": [
+					"Senior SQA Engineer",
+					"SQA Engineer",
+					"Manual QA Engineer"
+				],
+				"jobCategories": [
+					"software quality assurance",
+					"manual testing",
+					"api testing",
+					"performance testing",
+					"cyber security"
+				],
+				"employmentTypes": [],
+				"seniority": "senior",
+				"openToRemote": null,
+				"openToOnsite": null,
+				"openToHybrid": null
+			},
+			"availability": {
+				"status": null,
+				"availableFrom": null,
+				"noticePeriodDays": null,
+				"weeklyHoursMin": null,
+				"weeklyHoursMax": null,
+				"shiftPreferences": []
+			},
+			"compensation": {
+				"currency": null,
+				"hourlyRateMin": null,
+				"hourlyRateMax": null,
+				"monthlySalaryMin": null,
+				"monthlySalaryMax": null,
+				"feeType": null
+			},
+			"skills": [
+				{
+					"name": "Manual Testing",
+					"normalizedName": "manual testing",
+					"category": "software quality assurance",
+					"type": "technical",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Requirement Analysis",
+					"normalizedName": "requirement analysis",
+					"category": "software quality assurance",
+					"type": "technical",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Test Planning",
+					"normalizedName": "test planning",
+					"category": "software quality assurance",
+					"type": "technical",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Test Case Design",
+					"normalizedName": "test case design",
+					"category": "software quality assurance",
+					"type": "technical",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Test Case Writing",
+					"normalizedName": "test case writing",
+					"category": "software quality assurance",
+					"type": "technical",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Test Execution",
+					"normalizedName": "test execution",
+					"category": "software quality assurance",
+					"type": "technical",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Test Report Creation",
+					"normalizedName": "test report creation",
+					"category": "software quality assurance",
+					"type": "technical",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Root Cause Analysis",
+					"normalizedName": "root cause analysis",
+					"category": "software quality assurance",
+					"type": "technical",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Bug Reporting",
+					"normalizedName": "bug reporting",
+					"category": "software quality assurance",
+					"type": "technical",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "JMeter",
+					"normalizedName": "jmeter",
+					"category": "performance testing",
+					"type": "tool",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Postman",
+					"normalizedName": "postman",
+					"category": "api testing",
+					"type": "tool",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Jira",
+					"normalizedName": "jira",
+					"category": "project management",
+					"type": "tool",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Nmap",
+					"normalizedName": "nmap",
+					"category": "security testing",
+					"type": "tool",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "SDLC",
+					"normalizedName": "sdlc",
+					"category": "software engineering",
+					"type": "concept",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "STLC",
+					"normalizedName": "stlc",
+					"category": "software quality assurance",
+					"type": "concept",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "OOP",
+					"normalizedName": "oop",
+					"category": "software engineering",
+					"type": "concept",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "C",
+					"normalizedName": "c",
+					"category": "programming language",
+					"type": "technical",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "C++",
+					"normalizedName": "c++",
+					"category": "programming language",
+					"type": "technical",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Java",
+					"normalizedName": "java",
+					"category": "programming language",
+					"type": "technical",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Python",
+					"normalizedName": "python",
+					"category": "programming language",
+					"type": "technical",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "MySQL",
+					"normalizedName": "mysql",
+					"category": "database",
+					"type": "technical",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "GitHub",
+					"normalizedName": "github",
+					"category": "source control",
+					"type": "tool",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				}
+			],
+			"skillNames": [
+				"manual testing",
+				"requirement analysis",
+				"test planning",
+				"test case design",
+				"test case writing",
+				"test execution",
+				"test report creation",
+				"root cause analysis",
+				"bug reporting",
+				"jmeter",
+				"postman",
+				"jira",
+				"nmap",
+				"sdlc",
+				"stlc",
+				"oop",
+				"c",
+				"c++",
+				"java",
+				"python",
+				"mysql",
+				"github"
+			],
+			"skillCategories": [
+				"software quality assurance",
+				"performance testing",
+				"api testing",
+				"project management",
+				"security testing",
+				"software engineering",
+				"programming language",
+				"database",
+				"source control"
+			],
+			"experience": [],
+			"education": [
+				{
+					"degree": "B.Sc. in Computer Science and Engineering",
+					"fieldOfStudy": "Computer Science and Engineering",
+					"institution": "United International University",
+					"startYear": null,
+					"endYear": 2019
+				},
+				{
+					"degree": "Higher Secondary Certificate",
+					"fieldOfStudy": null,
+					"institution": "Fulbari Government College",
+					"startYear": null,
+					"endYear": 2014
+				},
+				{
+					"degree": "Secondary School Certificate",
+					"fieldOfStudy": null,
+					"institution": "Sujapur High School",
+					"startYear": null,
+					"endYear": 2012
+				}
+			],
+			"certifications": [
+				{
+					"name": "SQA and Cyber Security Training",
+					"issuer": "IT Training BD",
+					"issuedAt": "2021-10-01",
+					"expiresAt": null,
+					"licenseNumber": null
+				},
+				{
+					"name": "Digital Marketing Course",
+					"issuer": "Learning and Earning Development Project",
+					"issuedAt": "2020-01-01",
+					"expiresAt": null,
+					"licenseNumber": null
+				}
+			],
+			"languages": [],
+			"projects": [
+				{
+					"name": "Manual Test Case Writing",
+					"description": "Sample manual testing work focused on writing test cases.",
+					"tools": ["Manual Testing", "Test Case Writing"],
+					"url": null
+				},
+				{
+					"name": "Load Testing Using JMeter",
+					"description": "Sample performance testing work using JMeter.",
+					"tools": ["JMeter", "Performance Testing"],
+					"url": null
+				},
+				{
+					"name": "API Testing Using Postman",
+					"description": "Sample API testing work using Postman.",
+					"tools": ["Postman", "API Testing"],
+					"url": null
+				},
+				{
+					"name": "Smart Irrigation Control System for BRRI",
+					"description": "Academic final-year group project in collaboration with Cisco Networking Academy and BRRI.",
+					"tools": ["System Testing", "Performance Analysis"],
+					"url": null
+				},
+				{
+					"name": "Shop Management System",
+					"description": "GUI-based Java application using a MySQL database.",
+					"tools": ["Java", "MySQL"],
+					"url": null
+				},
+				{
+					"name": "Online Shopping System",
+					"description": "Academic project covering UI design, system design, use case diagram, and front-end development.",
+					"tools": ["UI Design", "Frontend Development"],
+					"url": null
+				},
+				{
+					"name": "Wireless Home Automation System",
+					"description": "Hardware development, programming, system testing, and performance analysis project.",
+					"tools": ["Programming", "System Testing"],
+					"url": null
+				}
+			],
+			"totalExperienceMonths": 0,
+			"industries": [
+				"software quality assurance",
+				"cyber security",
+				"software development"
+			],
+			"tags": [
+				"sqa",
+				"manual testing",
+				"api testing",
+				"performance testing",
+				"jmeter",
+				"postman",
+				"jira",
+				"nmap"
+			],
+			"searchText": "Ruhina Akter | Senior SQA Engineer | Looking to secure a Senior SQA Engineer role with opportunities for growth and expanding learning. | Senior SQA Engineer | SQA Engineer | Manual QA Engineer | software quality assurance | manual testing | api testing | performance testing | cyber security | Manual Testing | Requirement Analysis | Test Planning | Test Case Design | Test Case Writing | Test Execution | Test Report Creation | Root Cause Analysis | Bug Reporting | JMeter | Postman | Jira | Nmap | SDLC | STLC | OOP | C | C++ | Java | Python | MySQL | GitHub | B.Sc. in Computer Science and Engineering | Computer Science and Engineering | United International University | Higher Secondary Certificate | Fulbari Government College | Secondary School Certificate | Sujapur High School | SQA and Cyber Security Training | IT Training BD | Digital Marketing Course | Learning and Earning Development Project | Manual Test Case Writing | Sample manual testing work focused on writing test cases. | Manual Testing | Test Case Writing | Load Testing Using JMeter | Sample performance testing work using JMeter. | JMeter | Performance Testing | API Testing Using Postman | Sample API testing work using Postman. | Postman | API Testing | Smart Irrigation Control System for BRRI | Academic final-year group project in collaboration with Cisco Networking Academy and BRRI. | System Testing | Performance Analysis | Shop Management System | GUI-based Java application using a MySQL database. | Java | MySQL | Online Shopping System | Academic project covering UI design, system design, use case diagram, and front-end development. | UI Design | Frontend Development | Wireless Home Automation System | Hardware development, programming, system testing, and performance analysis project. | Programming | System Testing | software quality assurance | cyber security | software development | sqa | manual testing | api testing | performance testing | jmeter | postman | jira | nmap",
+			"profileEmbedding": null,
+			"createdAt": "2026-05-16T00:00:00.000Z",
+			"updatedAt": "2026-05-16T00:00:00.000Z",
+			"lastActiveAt": null,
+			"profileCompleteness": 0.78
+		},
+		{
+			"personUid": "person_sadat_hossain",
+			"tenantUid": null,
+			"profileStatus": "active",
+			"profileType": "candidate",
+			"visibility": "private",
+			"fullName": "Sadat Hossain",
+			"headline": "Junior Front-End Developer",
+			"summary": "Detail-oriented computer science graduate with front-end development experience, strong analytical and organizational skills, and experience working in teams.",
+			"contact": {
+				"email": "sadatxcv@gmail.com",
+				"phone": "+8801303324015, +8801914181043",
+				"linkedinUrl": null,
+				"githubUrl": "https://github.com/Sadatxcv",
+				"portfolioUrl": null
+			},
+			"location": {
+				"country": "Bangladesh",
+				"countryCode": "BD",
+				"city": "Dhaka",
+				"district": null,
+				"state": "Dhaka",
+				"postalCode": null,
+				"geo": null,
+				"remotePreference": null,
+				"willingToRelocate": null
+			},
+			"jobPreferences": {
+				"desiredTitles": [
+					"Junior Front-End Developer",
+					"Front-End Developer",
+					"React Developer"
+				],
+				"jobCategories": [
+					"frontend development",
+					"web development",
+					"software development"
+				],
+				"employmentTypes": [],
+				"seniority": "junior",
+				"openToRemote": null,
+				"openToOnsite": null,
+				"openToHybrid": null
+			},
+			"availability": {
+				"status": null,
+				"availableFrom": null,
+				"noticePeriodDays": null,
+				"weeklyHoursMin": null,
+				"weeklyHoursMax": null,
+				"shiftPreferences": []
+			},
+			"compensation": {
+				"currency": null,
+				"hourlyRateMin": null,
+				"hourlyRateMax": null,
+				"monthlySalaryMin": null,
+				"monthlySalaryMax": null,
+				"feeType": null
+			},
+			"skills": [
+				{
+					"name": "Client Presentations",
+					"normalizedName": "client presentations",
+					"category": "business communication",
+					"type": "soft",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Web Development",
+					"normalizedName": "web development",
+					"category": "web development",
+					"type": "technical",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "React.js",
+					"normalizedName": "react.js",
+					"category": "frontend development",
+					"type": "technical",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "HTML",
+					"normalizedName": "html",
+					"category": "frontend development",
+					"type": "technical",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "CSS",
+					"normalizedName": "css",
+					"category": "frontend development",
+					"type": "technical",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "C++",
+					"normalizedName": "c++",
+					"category": "programming language",
+					"type": "technical",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Java",
+					"normalizedName": "java",
+					"category": "programming language",
+					"type": "technical",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Adobe Lightroom",
+					"normalizedName": "adobe lightroom",
+					"category": "design tool",
+					"type": "tool",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Problem Solving",
+					"normalizedName": "problem solving",
+					"category": "soft skills",
+					"type": "soft",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Organizational Skills",
+					"normalizedName": "organizational skills",
+					"category": "soft skills",
+					"type": "soft",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Client/Customer Management",
+					"normalizedName": "client/customer management",
+					"category": "customer management",
+					"type": "soft",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Adapting and Learning",
+					"normalizedName": "adapting and learning",
+					"category": "soft skills",
+					"type": "soft",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Programming Algorithm Implementation",
+					"normalizedName": "programming algorithm implementation",
+					"category": "computer science",
+					"type": "technical",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "VS Code",
+					"normalizedName": "vs code",
+					"category": "developer tool",
+					"type": "tool",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Technical Analysis",
+					"normalizedName": "technical analysis",
+					"category": "software engineering",
+					"type": "technical",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Teamwork and Communication",
+					"normalizedName": "teamwork and communication",
+					"category": "soft skills",
+					"type": "soft",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Detail-oriented Work",
+					"normalizedName": "detail-oriented work",
+					"category": "soft skills",
+					"type": "soft",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Rational Thinking",
+					"normalizedName": "rational thinking",
+					"category": "soft skills",
+					"type": "soft",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Typing 40+ WPM",
+					"normalizedName": "typing 40+ wpm",
+					"category": "administrative",
+					"type": "technical",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "English Fluency",
+					"normalizedName": "english fluency",
+					"category": "language",
+					"type": "soft",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Front-end Coding",
+					"normalizedName": "front-end coding",
+					"category": "frontend development",
+					"type": "technical",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				}
+			],
+			"skillNames": [
+				"client presentations",
+				"web development",
+				"react.js",
+				"html",
+				"css",
+				"c++",
+				"java",
+				"adobe lightroom",
+				"problem solving",
+				"organizational skills",
+				"client/customer management",
+				"adapting and learning",
+				"programming algorithm implementation",
+				"vs code",
+				"technical analysis",
+				"teamwork and communication",
+				"detail-oriented work",
+				"rational thinking",
+				"typing 40+ wpm",
+				"english fluency",
+				"front-end coding"
+			],
+			"skillCategories": [
+				"business communication",
+				"web development",
+				"frontend development",
+				"programming language",
+				"design tool",
+				"soft skills",
+				"customer management",
+				"computer science",
+				"developer tool",
+				"software engineering",
+				"administrative",
+				"language"
+			],
+			"experience": [
+				{
+					"title": "Junior Front-End Developer",
+					"company": "OS IT Solutions Limited",
+					"employmentType": null,
+					"location": "Dhaka, Bangladesh",
+					"startDate": "2022-02-01",
+					"endDate": "2022-04-30",
+					"isCurrent": false,
+					"durationMonths": 3,
+					"description": "Built optimized landing pages and websites using React.js, HTML, and CSS while contributing to Agile ceremonies and client requirement discussions.",
+					"responsibilities": [
+						"Manipulated and implemented object-oriented programming models.",
+						"Contributed to daily scrum meetings with team updates.",
+						"Gathered and defined customer requirements and project specifications.",
+						"Built responsive landing pages and websites with cross-browser compatibility.",
+						"Collaborated with stakeholders during development to confirm design best practices.",
+						"Managed design tasks from conception to completion.",
+						"Responded to client queries and maintained project documents."
+					],
+					"tools": ["React.js", "HTML", "CSS"],
+					"industries": ["software development", "web development"]
+				},
+				{
+					"title": "Intern Front-End Developer",
+					"company": "OS IT Solutions Limited",
+					"employmentType": null,
+					"location": "Dhaka, Bangladesh",
+					"startDate": "2021-10-01",
+					"endDate": "2022-01-31",
+					"isCurrent": false,
+					"durationMonths": 4,
+					"description": "Worked as a front-end intern in an Agile-driven environment, contributing to landing pages, website content, stakeholder collaboration, and project documentation.",
+					"responsibilities": [
+						"Managed full-cycle design tasks while maintaining guidelines.",
+						"Created unique spaces for marketing ads within landing pages.",
+						"Worked in an Agile-driven environment to maintain project timelines.",
+						"Contributed to content creation for the company website.",
+						"Analyzed problems, identified solutions, and made decisions.",
+						"Carried out day-to-day duties accurately and efficiently."
+					],
+					"tools": ["React.js", "HTML", "CSS"],
+					"industries": ["software development", "web development"]
+				},
+				{
+					"title": "Student Tutor",
+					"company": "Freelance",
+					"employmentType": "freelance",
+					"location": "Dhaka, Bangladesh",
+					"startDate": "2016-05-01",
+					"endDate": null,
+					"isCurrent": true,
+					"durationMonths": 120,
+					"description": "Provided one-to-one tutoring support for A-level and O-level students through in-person, online, and instant appointment options.",
+					"responsibilities": [
+						"Applied different teaching techniques to improve student grades and confidence.",
+						"Planned lessons to strengthen weak subjects and build skills.",
+						"Collaborated with students to complete assignments and identify learning gaps."
+					],
+					"tools": [],
+					"industries": ["education"]
+				},
+				{
+					"title": "Teacher Assistant",
+					"company": "Independent University, Bangladesh",
+					"employmentType": null,
+					"location": "Dhaka, Bangladesh",
+					"startDate": "2017-09-01",
+					"endDate": "2017-12-31",
+					"isCurrent": false,
+					"durationMonths": 4,
+					"description": "Supported student learning objectives through personalized and small-group assistance.",
+					"responsibilities": [
+						"Reviewed lesson material with students individually or in groups.",
+						"Worked with the lead teacher to monitor class schedule and attendance.",
+						"Provided classroom and exam invigilation support."
+					],
+					"tools": [],
+					"industries": ["education"]
+				}
+			],
+			"education": [
+				{
+					"degree": "Bachelor of Science",
+					"fieldOfStudy": "Computer Science",
+					"institution": "Independent University, Bangladesh",
+					"startYear": 2016,
+					"endYear": 2021
+				},
+				{
+					"degree": "IGCSE / A-Levels",
+					"fieldOfStudy": null,
+					"institution": "Mastermind School",
+					"startYear": null,
+					"endYear": 2016
+				},
+				{
+					"degree": "IGCSE / O-Levels",
+					"fieldOfStudy": null,
+					"institution": "Mastermind School",
+					"startYear": null,
+					"endYear": 2013
+				}
+			],
+			"certifications": [
+				{
+					"name": "IELTS - 7.0 Band",
+					"issuer": "International Development Program (IDP), Bangladesh",
+					"issuedAt": null,
+					"expiresAt": null,
+					"licenseNumber": null
+				}
+			],
+			"languages": [
+				{
+					"name": "English",
+					"proficiency": "fluent"
+				}
+			],
+			"projects": [],
+			"totalExperienceMonths": 7,
+			"industries": [
+				"software development",
+				"web development",
+				"education"
+			],
+			"tags": [
+				"frontend developer",
+				"react",
+				"html",
+				"css",
+				"junior developer",
+				"agile",
+				"client communication"
+			],
+			"searchText": "Sadat Hossain | Junior Front-End Developer | Detail-oriented computer science graduate with front-end development experience, strong analytical and organizational skills, and experience working in teams. | Junior Front-End Developer | Front-End Developer | React Developer | frontend development | web development | software development | Client Presentations | Web Development | React.js | HTML | CSS | C++ | Java | Adobe Lightroom | Problem Solving | Organizational Skills | Client/Customer Management | Adapting and Learning | Programming Algorithm Implementation | VS Code | Technical Analysis | Teamwork and Communication | Detail-oriented Work | Rational Thinking | Typing 40+ WPM | English Fluency | Front-end Coding | Junior Front-End Developer | OS IT Solutions Limited | Built optimized landing pages and websites using React.js, HTML, and CSS while contributing to Agile ceremonies and client requirement discussions. | Manipulated and implemented object-oriented programming models. | Contributed to daily scrum meetings with team updates. | Gathered and defined customer requirements and project specifications. | Built responsive landing pages and websites with cross-browser compatibility. | Collaborated with stakeholders during development to confirm design best practices. | Managed design tasks from conception to completion. | Responded to client queries and maintained project documents. | React.js | HTML | CSS | software development | web development | Intern Front-End Developer | OS IT Solutions Limited | Worked as a front-end intern in an Agile-driven environment, contributing to landing pages, website content, stakeholder collaboration, and project documentation. | Managed full-cycle design tasks while maintaining guidelines. | Created unique spaces for marketing ads within landing pages. | Worked in an Agile-driven environment to maintain project timelines. | Contributed to content creation for the company website. | Analyzed problems, identified solutions, and made decisions. | Carried out day-to-day duties accurately and efficiently. | React.js | HTML | CSS | software development | web development | Student Tutor | Freelance | Provided one-to-one tutoring support for A-level and O-level students through in-person, online, and instant appointment options. | Applied different teaching techniques to improve student grades and confidence. | Planned lessons to strengthen weak subjects and build skills. | Collaborated with students to complete assignments and identify learning gaps. | education | Teacher Assistant | Independent University, Bangladesh | Supported student learning objectives through personalized and small-group assistance. | Reviewed lesson material with students individually or in groups. | Worked with the lead teacher to monitor class schedule and attendance. | Provided classroom and exam invigilation support. | education | Bachelor of Science | Computer Science | Independent University, Bangladesh | IGCSE / A-Levels | Mastermind School | IGCSE / O-Levels | Mastermind School | IELTS - 7.0 Band | International Development Program (IDP), Bangladesh | software development | web development | education | frontend developer | react | html | css | junior developer | agile | client communication",
+			"profileEmbedding": null,
+			"createdAt": "2026-05-16T00:00:00.000Z",
+			"updatedAt": "2026-05-16T00:00:00.000Z",
+			"lastActiveAt": null,
+			"profileCompleteness": 0.81
+		},
+		{
+			"personUid": "person_sadman_sakib",
+			"tenantUid": null,
+			"profileStatus": "active",
+			"profileType": "candidate",
+			"visibility": "private",
+			"fullName": "Sadman Sakib",
+			"headline": "Product Associate and Product Designer",
+			"summary": "Product associate and product designer with experience in product design, UX/UI design, user research, interaction design, content design, and data analysis.",
+			"contact": {
+				"email": "sadmansaron1@gmail.com",
+				"phone": "+8801714746425",
+				"linkedinUrl": null,
+				"githubUrl": null,
+				"portfolioUrl": "https://www.behance.net/SadmanSaron"
+			},
+			"location": {
+				"country": "Bangladesh",
+				"countryCode": "BD",
+				"city": "Dhaka",
+				"district": null,
+				"state": "Dhaka",
+				"postalCode": null,
+				"geo": null,
+				"remotePreference": null,
+				"willingToRelocate": null
+			},
+			"jobPreferences": {
+				"desiredTitles": [
+					"Product Associate",
+					"Product Designer",
+					"UX/UI Designer",
+					"UX Designer"
+				],
+				"jobCategories": [
+					"product management",
+					"product design",
+					"ux design",
+					"ui design",
+					"content design"
+				],
+				"employmentTypes": [],
+				"seniority": "mid-level",
+				"openToRemote": null,
+				"openToOnsite": null,
+				"openToHybrid": null
+			},
+			"availability": {
+				"status": null,
+				"availableFrom": null,
+				"noticePeriodDays": null,
+				"weeklyHoursMin": null,
+				"weeklyHoursMax": null,
+				"shiftPreferences": []
+			},
+			"compensation": {
+				"currency": null,
+				"hourlyRateMin": null,
+				"hourlyRateMax": null,
+				"monthlySalaryMin": null,
+				"monthlySalaryMax": null,
+				"feeType": null
+			},
+			"skills": [
+				{
+					"name": "Product Design",
+					"normalizedName": "product design",
+					"category": "product design",
+					"type": "technical",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Product Management",
+					"normalizedName": "product management",
+					"category": "product management",
+					"type": "technical",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "UX Design",
+					"normalizedName": "ux design",
+					"category": "ux design",
+					"type": "technical",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "UI Design",
+					"normalizedName": "ui design",
+					"category": "ui design",
+					"type": "technical",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Interaction Design",
+					"normalizedName": "interaction design",
+					"category": "ux design",
+					"type": "technical",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "User Experience Research",
+					"normalizedName": "user experience research",
+					"category": "ux research",
+					"type": "technical",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Usability Testing",
+					"normalizedName": "usability testing",
+					"category": "ux research",
+					"type": "technical",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Landing Page Design",
+					"normalizedName": "landing page design",
+					"category": "web design",
+					"type": "technical",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Content Design",
+					"normalizedName": "content design",
+					"category": "content design",
+					"type": "technical",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Process Improvement",
+					"normalizedName": "process improvement",
+					"category": "operations",
+					"type": "technical",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Figma",
+					"normalizedName": "figma",
+					"category": "design tool",
+					"type": "tool",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Python",
+					"normalizedName": "python",
+					"category": "programming language",
+					"type": "technical",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "R",
+					"normalizedName": "r",
+					"category": "programming language",
+					"type": "technical",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Data Analysis",
+					"normalizedName": "data analysis",
+					"category": "data analysis",
+					"type": "technical",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Exploratory Data Analysis",
+					"normalizedName": "exploratory data analysis",
+					"category": "data analysis",
+					"type": "technical",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "dplyr",
+					"normalizedName": "dplyr",
+					"category": "data analysis",
+					"type": "tool",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Correlation and Regression",
+					"normalizedName": "correlation and regression",
+					"category": "statistics",
+					"type": "technical",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "User Interviews",
+					"normalizedName": "user interviews",
+					"category": "ux research",
+					"type": "technical",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				},
+				{
+					"name": "Task Analysis",
+					"normalizedName": "task analysis",
+					"category": "ux research",
+					"type": "technical",
+					"proficiency": null,
+					"yearsExperience": null,
+					"lastUsedAt": null,
+					"verified": false
+				}
+			],
+			"skillNames": [
+				"product design",
+				"product management",
+				"ux design",
+				"ui design",
+				"interaction design",
+				"user experience research",
+				"usability testing",
+				"landing page design",
+				"content design",
+				"process improvement",
+				"figma",
+				"python",
+				"r",
+				"data analysis",
+				"exploratory data analysis",
+				"dplyr",
+				"correlation and regression",
+				"user interviews",
+				"task analysis"
+			],
+			"skillCategories": [
+				"product design",
+				"product management",
+				"ux design",
+				"ui design",
+				"ux research",
+				"web design",
+				"content design",
+				"operations",
+				"design tool",
+				"programming language",
+				"data analysis",
+				"statistics"
+			],
+			"experience": [
+				{
+					"title": "Product Associate",
+					"company": "Chaldal Ltd.",
+					"employmentType": null,
+					"location": "Dhaka, Bangladesh",
+					"startDate": "2022-08-01",
+					"endDate": null,
+					"isCurrent": true,
+					"durationMonths": 45,
+					"description": "Product associate for a grocery e-commerce startup, working as a thought partner to product managers, engineers, and stakeholders.",
+					"responsibilities": [
+						"Created technological and process solutions that improve business and operations.",
+						"Took ownership of interaction designs with a focus on simplicity, functionality, and user experience."
+					],
+					"tools": ["Product Design", "UX Design"],
+					"industries": [
+						"e-commerce",
+						"product management",
+						"operations"
+					]
+				},
+				{
+					"title": "Product Designer",
+					"company": "Kloudoop Limited",
+					"employmentType": null,
+					"location": "Dhaka, Bangladesh",
+					"startDate": "2020-12-01",
+					"endDate": null,
+					"isCurrent": true,
+					"durationMonths": 65,
+					"description": "Responsible for overall product design and execution for a bootstrapped tech startup.",
+					"responsibilities": [
+						"Collaborated with offshore developers and engineers.",
+						"Evaluated and assessed user experiences for Kloudoop Education, a school management solution."
+					],
+					"tools": ["Product Design", "UX Research", "Figma"],
+					"industries": ["education technology", "product design"]
+				},
+				{
+					"title": "UX/UI Designer",
+					"company": "WPPOOL",
+					"employmentType": null,
+					"location": "Dhaka, Bangladesh",
+					"startDate": "2021-07-01",
+					"endDate": "2021-12-31",
+					"isCurrent": false,
+					"durationMonths": 6,
+					"description": "Conducted usability tests and user experience research for existing and new WordPress products.",
+					"responsibilities": [
+						"Optimized interfaces and usability patterns.",
+						"Designed landing pages for existing company products.",
+						"Worked with product managers and engineers to design end-to-end user experiences and ship products efficiently."
+					],
+					"tools": [
+						"UX Research",
+						"Usability Testing",
+						"UI Design",
+						"Landing Page Design"
+					],
+					"industries": [
+						"wordpress",
+						"software development",
+						"product design"
+					]
+				},
+				{
+					"title": "Content Designer",
+					"company": "GARBAGEMAN LTD.",
+					"employmentType": "part-time",
+					"location": "Dhaka, Bangladesh",
+					"startDate": "2020-12-01",
+					"endDate": "2021-06-30",
+					"isCurrent": false,
+					"durationMonths": 7,
+					"description": "Part-time content designer for a tech-based recycling business.",
+					"responsibilities": [
+						"Designed and promoted recycling solutions across social media.",
+						"Developed content for internal training and annual reports."
+					],
+					"tools": ["Content Design", "Social Media Design"],
+					"industries": [
+						"recycling",
+						"sustainability",
+						"content design"
+					]
+				}
+			],
+			"education": [
+				{
+					"degree": "B.Sc. in Civil and Environmental Engineering",
+					"fieldOfStudy": "Civil and Environmental Engineering",
+					"institution": "Islamic University of Technology (IUT)",
+					"startYear": null,
+					"endYear": 2022
+				},
+				{
+					"degree": "Higher Secondary School Certificate",
+					"fieldOfStudy": null,
+					"institution": "St. Joseph Higher Secondary School",
+					"startYear": null,
+					"endYear": null
+				}
+			],
+			"certifications": [
+				{
+					"name": "User Experience: The Beginner’s Guide",
+					"issuer": "Interaction Design Foundation (IxDF)",
+					"issuedAt": null,
+					"expiresAt": null,
+					"licenseNumber": null
+				},
+				{
+					"name": "Data Analysis Using R",
+					"issuer": "DataCamp",
+					"issuedAt": null,
+					"expiresAt": null,
+					"licenseNumber": null
+				}
+			],
+			"languages": [
+				{
+					"name": "Bangla",
+					"proficiency": "proficient"
+				},
+				{
+					"name": "English",
+					"proficiency": "proficient"
+				}
+			],
+			"projects": [
+				{
+					"name": "Social Venture Challenge Winner - HNMUN",
+					"description": "Won the Social Venture Challenge competition at the 66th Harvard National Model United Nations conference.",
+					"tools": ["Social Entrepreneurship", "Product Thinking"],
+					"url": null
+				},
+				{
+					"name": "UNLEASH Hacks Bangladesh Runner Up",
+					"description": "Secured runner-up position by designing a healthcare solution service for a sustainability-focused hackathon.",
+					"tools": ["Service Design", "Healthcare Solution Design"],
+					"url": null
+				},
+				{
+					"name": "Exploratory Data Analysis Project in R",
+					"description": "Completed a public health data analysis project using R, including exploratory data analysis, data manipulation, correlation, and regression.",
+					"tools": ["R", "dplyr", "Data Analysis"],
+					"url": null
+				}
+			],
+			"totalExperienceMonths": 65,
+			"industries": [
+				"e-commerce",
+				"education technology",
+				"wordpress",
+				"recycling",
+				"sustainability",
+				"product design",
+				"ux design"
+			],
+			"tags": [
+				"product designer",
+				"product associate",
+				"ux ui designer",
+				"figma",
+				"python",
+				"r",
+				"data analysis",
+				"user research",
+				"usability testing"
+			],
+			"searchText": "Sadman Sakib | Product Associate and Product Designer | Product associate and product designer with experience in product design, UX/UI design, user research, interaction design, content design, and data analysis. | Product Associate | Product Designer | UX/UI Designer | UX Designer | product management | product design | ux design | ui design | content design | Product Design | Product Management | UX Design | UI Design | Interaction Design | User Experience Research | Usability Testing | Landing Page Design | Content Design | Process Improvement | Figma | Python | R | Data Analysis | Exploratory Data Analysis | dplyr | Correlation and Regression | User Interviews | Task Analysis | Product Associate | Chaldal Ltd. | Product associate for a grocery e-commerce startup, working as a thought partner to product managers, engineers, and stakeholders. | Created technological and process solutions that improve business and operations. | Took ownership of interaction designs with a focus on simplicity, functionality, and user experience. | Product Design | UX Design | e-commerce | product management | operations | Product Designer | Kloudoop Limited | Responsible for overall product design and execution for a bootstrapped tech startup. | Collaborated with offshore developers and engineers. | Evaluated and assessed user experiences for Kloudoop Education, a school management solution. | Product Design | UX Research | Figma | education technology | product design | UX/UI Designer | WPPOOL | Conducted usability tests and user experience research for existing and new WordPress products. | Optimized interfaces and usability patterns. | Designed landing pages for existing company products. | Worked with product managers and engineers to design end-to-end user experiences and ship products efficiently. | UX Research | Usability Testing | UI Design | Landing Page Design | wordpress | software development | product design | Content Designer | GARBAGEMAN LTD. | Part-time content designer for a tech-based recycling business. | Designed and promoted recycling solutions across social media. | Developed content for internal training and annual reports. | Content Design | Social Media Design | recycling | sustainability | content design | B.Sc. in Civil and Environmental Engineering | Civil and Environmental Engineering | Islamic University of Technology (IUT) | Higher Secondary School Certificate | St. Joseph Higher Secondary School | User Experience: The Beginner’s Guide | Interaction Design Foundation (IxDF) | Data Analysis Using R | DataCamp | Social Venture Challenge Winner - HNMUN | Won the Social Venture Challenge competition at the 66th Harvard National Model United Nations conference. | Social Entrepreneurship | Product Thinking | UNLEASH Hacks Bangladesh Runner Up | Secured runner-up position by designing a healthcare solution service for a sustainability-focused hackathon. | Service Design | Healthcare Solution Design | Exploratory Data Analysis Project in R | Completed a public health data analysis project using R, including exploratory data analysis, data manipulation, correlation, and regression. | R | dplyr | Data Analysis | e-commerce | education technology | wordpress | recycling | sustainability | product design | ux design | product designer | product associate | ux ui designer | figma | python | r | data analysis | user research | usability testing",
+			"profileEmbedding": null,
+			"createdAt": "2026-05-16T00:00:00.000Z",
+			"updatedAt": "2026-05-16T00:00:00.000Z",
+			"lastActiveAt": null,
+			"profileCompleteness": 0.84
 		}
 	]
 }
