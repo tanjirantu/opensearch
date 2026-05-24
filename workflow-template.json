@@ -1,0 +1,528 @@
+{
+	"name": "hybrid-product-search-provision",
+	"description": "Provisions an ingest pipeline for dense embeddings, a KNN-enabled product index, and a hybrid search pipeline with normalization.",
+	"use_case": "Hybrid Product Search",
+	"version": {
+		"template": "1.0.0",
+		"compatibility": ["2.12.0", "3.0.0"]
+	},
+	"workflows": {
+		"provision": {
+			"nodes": [
+				{
+					"id": "create_ingest_pipeline",
+					"type": "create_ingest_pipeline",
+					"user_inputs": {
+						"pipeline_id": "${{ ingest_pipeline_id }}",
+						"configurations": {
+							"description": "Generate dense product embeddings at ingest time",
+							"processors": [
+								{
+									"text_embedding": {
+										"model_id": "${{ model_id }}",
+										"field_map": {
+											"embedding_text": "embedding_vector"
+										}
+									}
+								}
+							]
+						}
+					}
+				},
+				{
+					"id": "create_index",
+					"type": "create_index",
+					"previous_node_inputs": {
+						"create_ingest_pipeline": "pipeline_id"
+					},
+					"user_inputs": {
+						"index_name": "${{ index_name }}",
+						"configurations": {
+							"settings": {
+								"index.knn": true,
+								"default_pipeline": "${{ ingest_pipeline_id }}"
+							},
+							"mappings": {
+								"properties": {
+									"uid": { "type": "keyword" },
+									"sellerUid": { "type": "keyword" },
+									"supplierUid": { "type": "keyword" },
+									"distributorUid": { "type": "keyword" },
+									"storeUid": { "type": "keyword" },
+									"sourceType": { "type": "keyword" },
+									"feCatalogProductId": { "type": "keyword" },
+									"feSyncStatus": { "type": "keyword" },
+									"feLastSyncedAt": { "type": "date" },
+									"styleNumber": { "type": "keyword" },
+									"styleNumberPrefix": { "type": "keyword" },
+									"defaultSku": { "type": "keyword" },
+									"private": { "type": "boolean" },
+									"isActive": { "type": "boolean" },
+									"isDeleted": { "type": "boolean" },
+									"name": { "type": "text" },
+									"tags": { "type": "keyword" },
+									"descriptionPlainText": { "type": "text" },
+									"minOrderQty": { "type": "integer" },
+									"builderType": { "type": "keyword" },
+									"createdAt": { "type": "date" },
+									"updatedAt": { "type": "date" },
+									"embedding_text": { "type": "text" },
+									"embedding_vector": {
+										"type": "knn_vector",
+										"dimension": 1536,
+										"method": {
+											"name": "hnsw",
+											"engine": "lucene",
+											"space_type": "cosinesimil"
+										}
+									},
+									"productType": {
+										"properties": {
+											"uid": { "type": "keyword" },
+											"name": { "type": "keyword" }
+										}
+									},
+									"prices": {
+										"type": "nested",
+										"properties": {
+											"minOrderQty": {
+												"type": "integer"
+											},
+											"unitPrice": { "type": "float" }
+										}
+									},
+									"createdBy": {
+										"properties": {
+											"uid": { "type": "keyword" },
+											"userType": { "type": "keyword" }
+										}
+									},
+									"updatedBy": {
+										"properties": {
+											"uid": { "type": "keyword" },
+											"userType": { "type": "keyword" }
+										}
+									},
+									"images": {
+										"type": "nested",
+										"properties": {
+											"url": { "type": "keyword" },
+											"name": { "type": "keyword" },
+											"viewAngle": { "type": "keyword" },
+											"isDefault": { "type": "boolean" },
+											"zoomUrl": { "type": "keyword" },
+											"thumbnailUrl": {
+												"type": "keyword"
+											},
+											"colorName": { "type": "keyword" },
+											"hexCode": { "type": "keyword" },
+											"colorVariantValueId": {
+												"type": "keyword"
+											},
+											"imageType": { "type": "keyword" },
+											"placementId": {
+												"type": "keyword"
+											},
+											"compressed": { "type": "boolean" },
+											"size": { "type": "keyword" }
+										}
+									},
+									"variants": {
+										"type": "nested",
+										"properties": {
+											"label": { "type": "keyword" },
+											"value": {
+												"properties": {
+													"name": {
+														"type": "keyword"
+													},
+													"upcharge": {
+														"type": "float"
+													}
+												}
+											},
+											"values": {
+												"type": "nested",
+												"properties": {
+													"label": {
+														"type": "keyword"
+													},
+													"name": {
+														"type": "keyword"
+													},
+													"upcharge": {
+														"type": "float"
+													},
+													"quantity": {
+														"type": "integer"
+													}
+												}
+											}
+										}
+									},
+									"artworks": {
+										"type": "nested",
+										"properties": {
+											"url": { "type": "keyword" },
+											"filename": { "type": "keyword" },
+											"side": { "type": "keyword" },
+											"placementId": {
+												"type": "keyword"
+											},
+											"type": { "type": "keyword" },
+											"width": { "type": "float" },
+											"length": { "type": "float" },
+											"flipX": { "type": "float" },
+											"flipY": { "type": "float" },
+											"rotation": { "type": "float" },
+											"rotationX": { "type": "float" },
+											"rotationY": { "type": "float" },
+											"unitOfMeasurement": {
+												"type": "keyword"
+											},
+											"position": {
+												"properties": {
+													"top": { "type": "float" },
+													"left": { "type": "float" }
+												}
+											},
+											"layouts": {
+												"type": "nested",
+												"properties": {
+													"rotation": {
+														"type": "float"
+													},
+													"rotationX": {
+														"type": "float"
+													},
+													"rotationY": {
+														"type": "float"
+													},
+													"radius": {
+														"type": "float"
+													},
+													"imageFit": {
+														"type": "keyword"
+													},
+													"opacity": {
+														"type": "float"
+													},
+													"scale": {
+														"type": "float"
+													},
+													"maskImageUrl": {
+														"type": "keyword"
+													},
+													"blendMode": {
+														"type": "keyword"
+													},
+													"width": {
+														"type": "float"
+													},
+													"length": {
+														"type": "float"
+													},
+													"url": {
+														"type": "keyword"
+													},
+													"containerRatio": {
+														"properties": {
+															"x": {
+																"type": "float"
+															},
+															"y": {
+																"type": "float"
+															}
+														}
+													},
+													"outerBlock": {
+														"properties": {
+															"width": {
+																"type": "float"
+															},
+															"length": {
+																"type": "float"
+															},
+															"position": {
+																"properties": {
+																	"top": {
+																		"type": "float"
+																	},
+																	"left": {
+																		"type": "float"
+																	}
+																}
+															}
+														}
+													},
+													"layerColors": {
+														"type": "nested",
+														"properties": {
+															"type": {
+																"type": "keyword"
+															},
+															"gradientType": {
+																"type": "keyword"
+															},
+															"angle": {
+																"type": "float"
+															},
+															"colors": {
+																"type": "nested",
+																"properties": {
+																	"color": {
+																		"type": "keyword"
+																	},
+																	"opacity": {
+																		"type": "float"
+																	},
+																	"position": {
+																		"type": "float"
+																	}
+																}
+															}
+														}
+													},
+													"innerMaskPoints": {
+														"type": "nested",
+														"properties": {
+															"x": {
+																"type": "float"
+															},
+															"y": {
+																"type": "float"
+															},
+															"radius": {
+																"type": "float"
+															}
+														}
+													},
+													"maskPoints": {
+														"type": "nested",
+														"properties": {
+															"x": {
+																"type": "float"
+															},
+															"y": {
+																"type": "float"
+															},
+															"radius": {
+																"type": "float"
+															}
+														}
+													}
+												}
+											}
+										}
+									},
+									"artworkLayouts": {
+										"type": "nested",
+										"properties": {
+											"baseImageUrl": {
+												"type": "keyword"
+											},
+											"side": { "type": "keyword" },
+											"placementId": {
+												"type": "keyword"
+											},
+											"length": { "type": "float" },
+											"width": { "type": "float" },
+											"containerRatio": {
+												"properties": {
+													"x": { "type": "float" },
+													"y": { "type": "float" }
+												}
+											},
+											"outerBlock": {
+												"properties": {
+													"length": {
+														"type": "float"
+													},
+													"width": {
+														"type": "float"
+													},
+													"position": {
+														"properties": {
+															"top": {
+																"type": "float"
+															},
+															"left": {
+																"type": "float"
+															}
+														}
+													}
+												}
+											},
+											"types": {
+												"type": "nested",
+												"properties": {
+													"name": {
+														"type": "keyword"
+													}
+												}
+											},
+											"innerBlocks": {
+												"type": "nested",
+												"properties": {
+													"hidden": {
+														"type": "boolean"
+													},
+													"isBackground": {
+														"type": "boolean"
+													},
+													"label": {
+														"type": "keyword"
+													},
+													"placeholder": {
+														"type": "keyword"
+													},
+													"length": {
+														"type": "float"
+													},
+													"width": {
+														"type": "float"
+													},
+													"rotation": {
+														"type": "float"
+													},
+													"rotationX": {
+														"type": "float"
+													},
+													"rotationY": {
+														"type": "float"
+													},
+													"radius": {
+														"type": "float"
+													},
+													"imageFit": {
+														"type": "keyword"
+													},
+													"opacity": {
+														"type": "float"
+													},
+													"scale": {
+														"type": "float"
+													},
+													"maskImageUrl": {
+														"type": "keyword"
+													},
+													"blendMode": {
+														"type": "keyword"
+													},
+													"unitOfMeasurement": {
+														"type": "keyword"
+													},
+													"position": {
+														"properties": {
+															"top": {
+																"type": "float"
+															},
+															"left": {
+																"type": "float"
+															}
+														}
+													},
+													"layerColors": {
+														"type": "nested",
+														"properties": {
+															"type": {
+																"type": "keyword"
+															},
+															"gradientType": {
+																"type": "keyword"
+															},
+															"angle": {
+																"type": "float"
+															},
+															"colors": {
+																"type": "nested",
+																"properties": {
+																	"color": {
+																		"type": "keyword"
+																	},
+																	"opacity": {
+																		"type": "float"
+																	},
+																	"position": {
+																		"type": "float"
+																	}
+																}
+															}
+														}
+													},
+													"innerMaskPoints": {
+														"type": "nested",
+														"properties": {
+															"x": {
+																"type": "float"
+															},
+															"y": {
+																"type": "float"
+															},
+															"radius": {
+																"type": "float"
+															}
+														}
+													},
+													"maskPoints": {
+														"type": "nested",
+														"properties": {
+															"x": {
+																"type": "float"
+															},
+															"y": {
+																"type": "float"
+															},
+															"radius": {
+																"type": "float"
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				{
+					"id": "create_search_pipeline",
+					"type": "create_search_pipeline",
+					"previous_node_inputs": {
+						"create_ingest_pipeline": "pipeline_id"
+					},
+					"user_inputs": {
+						"pipeline_id": "${{ search_pipeline_id }}",
+						"configurations": {
+							"description": "Hybrid score fusion for product search",
+							"phase_results_processors": [
+								{
+									"normalization-processor": {
+										"normalization": {
+											"technique": "min_max"
+										},
+										"combination": {
+											"technique": "arithmetic_mean",
+											"parameters": {
+												"weights": [0.6, 0.4]
+											}
+										}
+									}
+								}
+							]
+						}
+					}
+				}
+			],
+			"edges": [
+				{ "source": "create_ingest_pipeline", "dest": "create_index" },
+				{
+					"source": "create_ingest_pipeline",
+					"dest": "create_search_pipeline"
+				}
+			]
+		}
+	}
+}
