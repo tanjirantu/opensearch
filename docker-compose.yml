@@ -1,4 +1,3 @@
----
 services:
     opensearch-node1:
         image: opensearchproject/opensearch:3.6.0
@@ -119,6 +118,9 @@ services:
             OPENSEARCH_HOSTS: '["https://opensearch-node1:9200","https://opensearch-node2:9200"]'
             OPENSEARCH_USERNAME: ${DASHBOARDS_USERNAME}
             OPENSEARCH_PASSWORD: ${DASHBOARDS_PASSWORD}
+
+            # Demo-only: avoid local certificate complexity for testing only
+            OPENSEARCH_SSL_VERIFICATIONMODE: none
         volumes:
             # Not :ro — the entrypoint script writes OPENSEARCH_HOSTS and credentials
             # into this file at startup via sed; a read-only mount silently breaks that.

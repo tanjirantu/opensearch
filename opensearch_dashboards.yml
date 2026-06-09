@@ -4,6 +4,14 @@ explore.enabled: true
 
 server.name: opensearch_dashboards
 server.host: "0.0.0.0"
+
+opensearch.hosts:
+  - "https://opensearch-node1:9200"
+  - "https://opensearch-node2:9200"
+
+opensearch.username: "${OPENSEARCH_USERNAME}"
+opensearch.password: "${OPENSEARCH_PASSWORD}"
+
 server.ssl.enabled: false
 
 # LOCAL DEV ONLY — skips TLS certificate validation for the self-signed demo certs.
