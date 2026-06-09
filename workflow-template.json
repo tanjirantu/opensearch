@@ -44,32 +44,114 @@
 							},
 							"mappings": {
 								"properties": {
-									"uid": { "type": "keyword" },
-									"sellerUid": { "type": "keyword" },
-									"supplierUid": { "type": "keyword" },
-									"distributorUid": { "type": "keyword" },
-									"storeUid": { "type": "keyword" },
-									"sourceType": { "type": "keyword" },
-									"feCatalogProductId": { "type": "keyword" },
-									"feSyncStatus": { "type": "keyword" },
-									"feLastSyncedAt": { "type": "date" },
-									"styleNumber": { "type": "keyword" },
-									"styleNumberPrefix": { "type": "keyword" },
-									"defaultSku": { "type": "keyword" },
-									"private": { "type": "boolean" },
-									"isActive": { "type": "boolean" },
-									"isDeleted": { "type": "boolean" },
-									"name": { "type": "text" },
-									"tags": { "type": "keyword" },
-									"descriptionPlainText": { "type": "text" },
-									"minOrderQty": { "type": "integer" },
-									"builderType": { "type": "keyword" },
-									"createdAt": { "type": "date" },
-									"updatedAt": { "type": "date" },
-									"embedding_text": { "type": "text" },
+									"uid": {
+										"type": "keyword"
+									},
+									"sellerUid": {
+										"type": "keyword"
+									},
+									"supplierUid": {
+										"type": "keyword"
+									},
+									"distributorUid": {
+										"type": "keyword"
+									},
+									"storeUid": {
+										"type": "keyword"
+									},
+									"sourceType": {
+										"type": "keyword"
+									},
+									"feCatalogProductId": {
+										"type": "keyword"
+									},
+									"feSyncStatus": {
+										"type": "keyword"
+									},
+									"feLastSyncedAt": {
+										"type": "date"
+									},
+									"styleNumber": {
+										"type": "keyword"
+									},
+									"styleNumberPrefix": {
+										"type": "keyword"
+									},
+									"defaultSku": {
+										"type": "keyword"
+									},
+									"private": {
+										"type": "boolean"
+									},
+									"isActive": {
+										"type": "boolean"
+									},
+									"isDeleted": {
+										"type": "boolean"
+									},
+									"name": {
+										"type": "text",
+										"fields": {
+											"keyword": {
+												"type": "keyword",
+												"ignore_above": 256
+											}
+										}
+									},
+									"categoryId": {
+										"type": "keyword"
+									},
+									"categoryName": {
+										"type": "text",
+										"fields": {
+											"keyword": {
+												"type": "keyword",
+												"ignore_above": 256
+											}
+										}
+									},
+									"keywords": {
+										"type": "text",
+										"fields": {
+											"keyword": {
+												"type": "keyword",
+												"ignore_above": 256
+											}
+										}
+									},
+									"tags": {
+										"type": "keyword"
+									},
+									"colors": {
+										"type": "keyword"
+									},
+									"sizes": {
+										"type": "keyword"
+									},
+									"descriptionPlainText": {
+										"type": "text"
+									},
+									"minOrderQty": {
+										"type": "integer"
+									},
+									"unitPrice": {
+										"type": "float"
+									},
+									"builderType": {
+										"type": "keyword"
+									},
+									"createdAt": {
+										"type": "date"
+									},
+									"updatedAt": {
+										"type": "date"
+									},
+									"embedding_text": {
+										"type": "text"
+									},
 									"embedding_vector": {
 										"type": "knn_vector",
-										"dimension": 1536,
+										"dimension": 3072,
 										"method": {
 											"name": "hnsw",
 											"engine": "lucene",
@@ -78,8 +160,17 @@
 									},
 									"productType": {
 										"properties": {
-											"uid": { "type": "keyword" },
-											"name": { "type": "keyword" }
+											"uid": {
+												"type": "keyword"
+											},
+											"name": {
+												"type": "keyword",
+												"fields": {
+													"text": {
+														"type": "text"
+													}
+												}
+											}
 										}
 									},
 									"prices": {
@@ -88,49 +179,81 @@
 											"minOrderQty": {
 												"type": "integer"
 											},
-											"unitPrice": { "type": "float" }
+											"unitPrice": {
+												"type": "float"
+											}
 										}
 									},
 									"createdBy": {
 										"properties": {
-											"uid": { "type": "keyword" },
-											"userType": { "type": "keyword" }
+											"uid": {
+												"type": "keyword"
+											},
+											"userType": {
+												"type": "keyword"
+											}
 										}
 									},
 									"updatedBy": {
 										"properties": {
-											"uid": { "type": "keyword" },
-											"userType": { "type": "keyword" }
+											"uid": {
+												"type": "keyword"
+											},
+											"userType": {
+												"type": "keyword"
+											}
 										}
 									},
 									"images": {
 										"type": "nested",
 										"properties": {
-											"url": { "type": "keyword" },
-											"name": { "type": "keyword" },
-											"viewAngle": { "type": "keyword" },
-											"isDefault": { "type": "boolean" },
-											"zoomUrl": { "type": "keyword" },
+											"url": {
+												"type": "keyword"
+											},
+											"name": {
+												"type": "keyword"
+											},
+											"viewAngle": {
+												"type": "keyword"
+											},
+											"isDefault": {
+												"type": "boolean"
+											},
+											"zoomUrl": {
+												"type": "keyword"
+											},
 											"thumbnailUrl": {
 												"type": "keyword"
 											},
-											"colorName": { "type": "keyword" },
-											"hexCode": { "type": "keyword" },
+											"colorName": {
+												"type": "keyword"
+											},
+											"hexCode": {
+												"type": "keyword"
+											},
 											"colorVariantValueId": {
 												"type": "keyword"
 											},
-											"imageType": { "type": "keyword" },
+											"imageType": {
+												"type": "keyword"
+											},
 											"placementId": {
 												"type": "keyword"
 											},
-											"compressed": { "type": "boolean" },
-											"size": { "type": "keyword" }
+											"compressed": {
+												"type": "boolean"
+											},
+											"size": {
+												"type": "keyword"
+											}
 										}
 									},
 									"variants": {
 										"type": "nested",
 										"properties": {
-											"label": { "type": "keyword" },
+											"label": {
+												"type": "keyword"
+											},
 											"value": {
 												"properties": {
 													"name": {
@@ -163,27 +286,53 @@
 									"artworks": {
 										"type": "nested",
 										"properties": {
-											"url": { "type": "keyword" },
-											"filename": { "type": "keyword" },
-											"side": { "type": "keyword" },
+											"url": {
+												"type": "keyword"
+											},
+											"filename": {
+												"type": "keyword"
+											},
+											"side": {
+												"type": "keyword"
+											},
 											"placementId": {
 												"type": "keyword"
 											},
-											"type": { "type": "keyword" },
-											"width": { "type": "float" },
-											"length": { "type": "float" },
-											"flipX": { "type": "float" },
-											"flipY": { "type": "float" },
-											"rotation": { "type": "float" },
-											"rotationX": { "type": "float" },
-											"rotationY": { "type": "float" },
+											"type": {
+												"type": "keyword"
+											},
+											"width": {
+												"type": "float"
+											},
+											"length": {
+												"type": "float"
+											},
+											"flipX": {
+												"type": "float"
+											},
+											"flipY": {
+												"type": "float"
+											},
+											"rotation": {
+												"type": "float"
+											},
+											"rotationX": {
+												"type": "float"
+											},
+											"rotationY": {
+												"type": "float"
+											},
 											"unitOfMeasurement": {
 												"type": "keyword"
 											},
 											"position": {
 												"properties": {
-													"top": { "type": "float" },
-													"left": { "type": "float" }
+													"top": {
+														"type": "float"
+													},
+													"left": {
+														"type": "float"
+													}
 												}
 											},
 											"layouts": {
@@ -321,16 +470,26 @@
 											"baseImageUrl": {
 												"type": "keyword"
 											},
-											"side": { "type": "keyword" },
+											"side": {
+												"type": "keyword"
+											},
 											"placementId": {
 												"type": "keyword"
 											},
-											"length": { "type": "float" },
-											"width": { "type": "float" },
+											"length": {
+												"type": "float"
+											},
+											"width": {
+												"type": "float"
+											},
 											"containerRatio": {
 												"properties": {
-													"x": { "type": "float" },
-													"y": { "type": "float" }
+													"x": {
+														"type": "float"
+													},
+													"y": {
+														"type": "float"
+													}
 												}
 											},
 											"outerBlock": {
@@ -490,9 +649,6 @@
 				{
 					"id": "create_search_pipeline",
 					"type": "create_search_pipeline",
-					"previous_node_inputs": {
-						"create_ingest_pipeline": "pipeline_id"
-					},
 					"user_inputs": {
 						"pipeline_id": "${{ search_pipeline_id }}",
 						"configurations": {
@@ -517,7 +673,10 @@
 				}
 			],
 			"edges": [
-				{ "source": "create_ingest_pipeline", "dest": "create_index" },
+				{
+					"source": "create_ingest_pipeline",
+					"dest": "create_index"
+				},
 				{
 					"source": "create_ingest_pipeline",
 					"dest": "create_search_pipeline"
