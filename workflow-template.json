@@ -3,8 +3,8 @@
 	"description": "Provisions an ingest pipeline for dense embeddings, a KNN-enabled product index, and a hybrid search pipeline with normalization.",
 	"use_case": "Hybrid Product Search",
 	"version": {
-		"template": "1.0.0",
-		"compatibility": ["2.12.0", "3.0.0"]
+		"template": "1.1.0",
+		"compatibility": ["2.12.0", "3.0.0", "3.6.0"]
 	},
 	"workflows": {
 		"provision": {
@@ -39,83 +39,145 @@
 						"index_name": "${{ index_name }}",
 						"configurations": {
 							"settings": {
+								"number_of_shards": 1,
+								"number_of_replicas": 0,
+								"index.max_result_window": 10000,
 								"index.knn": true,
-								"default_pipeline": "${{ ingest_pipeline_id }}"
+								"default_pipeline": "${{ ingest_pipeline_id }}",
+								"analysis": {
+									"normalizer": {
+										"lowercase_normalizer": {
+											"type": "custom",
+											"filter": ["lowercase"]
+										}
+									},
+									"tokenizer": {
+										"sku_trigram_tokenizer": {
+											"type": "ngram",
+											"min_gram": 3,
+											"max_gram": 3,
+											"token_chars": [
+												"letter",
+												"digit",
+												"punctuation"
+											]
+										}
+									},
+									"analyzer": {
+										"english_stem": {
+											"type": "english"
+										},
+										"sku_trigram": {
+											"type": "custom",
+											"tokenizer": "sku_trigram_tokenizer",
+											"filter": ["lowercase"]
+										}
+									}
+								}
 							},
 							"mappings": {
 								"properties": {
 									"uid": {
 										"type": "keyword"
 									},
-									"sellerUid": {
-										"type": "keyword"
+									"skus": {
+										"type": "text",
+										"analyzer": "sku_trigram",
+										"fields": {
+											"keyword": {
+												"type": "keyword",
+												"normalizer": "lowercase_normalizer"
+											}
+										}
+									},
+									"styleNumber": {
+										"type": "text",
+										"fields": {
+											"keyword": {
+												"type": "keyword"
+											},
+											"autocomplete": {
+												"type": "search_as_you_type",
+												"max_shingle_size": 3
+											}
+										}
 									},
 									"supplierUid": {
 										"type": "keyword"
 									},
-									"distributorUid": {
+									"sellerUid": {
 										"type": "keyword"
 									},
-									"storeUid": {
+									"brandUid": {
 										"type": "keyword"
 									},
-									"sourceType": {
-										"type": "keyword"
-									},
-									"feCatalogProductId": {
-										"type": "keyword"
-									},
-									"feSyncStatus": {
-										"type": "keyword"
-									},
-									"feLastSyncedAt": {
-										"type": "date"
-									},
-									"styleNumber": {
-										"type": "keyword"
-									},
-									"styleNumberPrefix": {
-										"type": "keyword"
-									},
-									"defaultSku": {
-										"type": "keyword"
-									},
-									"private": {
-										"type": "boolean"
-									},
-									"isActive": {
-										"type": "boolean"
-									},
-									"isDeleted": {
-										"type": "boolean"
-									},
-									"name": {
-										"type": "text",
-										"fields": {
-											"keyword": {
-												"type": "keyword",
-												"ignore_above": 256
+									"productType": {
+										"properties": {
+											"uid": {
+												"type": "keyword"
+											},
+											"name": {
+												"type": "text",
+												"analyzer": "english_stem",
+												"fields": {
+													"keyword": {
+														"type": "keyword"
+													},
+													"autocomplete": {
+														"type": "search_as_you_type",
+														"max_shingle_size": 3
+													}
+												}
 											}
 										}
 									},
-									"categoryId": {
+									"categoryUids": {
 										"type": "keyword"
 									},
-									"categoryName": {
+									"category": {
+										"type": "text",
+										"analyzer": "english_stem",
+										"fields": {
+											"keyword": {
+												"type": "keyword"
+											}
+										}
+									},
+									"brandName": {
 										"type": "text",
 										"fields": {
 											"keyword": {
-												"type": "keyword",
-												"ignore_above": 256
+												"type": "keyword"
+											}
+										}
+									},
+									"name": {
+										"type": "text",
+										"analyzer": "english_stem",
+										"fields": {
+											"keyword": {
+												"type": "keyword"
+											},
+											"autocomplete": {
+												"type": "search_as_you_type",
+												"max_shingle_size": 3
+											}
+										}
+									},
+									"descriptionPlainText": {
+										"type": "text",
+										"fields": {
+											"keyword": {
+												"type": "keyword"
 											}
 										}
 									},
 									"keywords": {
 										"type": "text",
+										"analyzer": "english_stem",
 										"fields": {
 											"keyword": {
-												"type": "keyword",
-												"ignore_above": 256
+												"type": "keyword"
 											}
 										}
 									},
@@ -125,23 +187,66 @@
 									"colors": {
 										"type": "keyword"
 									},
+									"colorLabels": {
+										"type": "keyword"
+									},
+									"colorLabelsNormalized": {
+										"type": "keyword"
+									},
+									"imageColors": {
+										"type": "keyword"
+									},
+									"imageColorVariantValueIds": {
+										"type": "keyword"
+									},
 									"sizes": {
 										"type": "keyword"
 									},
-									"descriptionPlainText": {
-										"type": "text"
+									"materials": {
+										"type": "keyword"
 									},
-									"minOrderQty": {
-										"type": "integer"
-									},
-									"unitPrice": {
-										"type": "float"
+									"features": {
+										"type": "keyword"
 									},
 									"builderType": {
 										"type": "keyword"
 									},
-									"createdAt": {
-										"type": "date"
+									"unitPrice": {
+										"type": "float"
+									},
+									"minPrice": {
+										"type": "float"
+									},
+									"maxPrice": {
+										"type": "float"
+									},
+									"leadTimeDays": {
+										"type": "integer"
+									},
+									"isActive": {
+										"type": "boolean"
+									},
+									"inStock": {
+										"type": "boolean"
+									},
+									"thumbnailUrl": {
+										"type": "keyword",
+										"index": false
+									},
+									"popularityScore": {
+										"type": "float"
+									},
+									"conversionScore": {
+										"type": "float"
+									},
+									"marginScore": {
+										"type": "float"
+									},
+									"isFeatured": {
+										"type": "integer"
+									},
+									"minOrderQty": {
+										"type": "integer"
 									},
 									"updatedAt": {
 										"type": "date"
@@ -149,496 +254,57 @@
 									"embedding_text": {
 										"type": "text"
 									},
+									"artworks": {
+										"type": "object",
+										"enabled": true
+									},
+									"artworkLayouts": {
+										"type": "object",
+										"enabled": true
+									},
+									"variants": {
+										"type": "object",
+										"enabled": true
+									},
+									"images": {
+										"type": "object",
+										"enabled": true
+									},
+									"prices": {
+										"type": "object",
+										"enabled": true
+									},
+									"markup": {
+										"properties": {
+											"product": {
+												"properties": {
+													"type": {
+														"type": "keyword"
+													},
+													"amount": {
+														"type": "float"
+													}
+												}
+											},
+											"decoration": {
+												"properties": {
+													"type": {
+														"type": "keyword"
+													},
+													"amount": {
+														"type": "float"
+													}
+												}
+											}
+										}
+									},
 									"embedding_vector": {
 										"type": "knn_vector",
-										"dimension": 3072,
+										"dimension": 1536,
 										"method": {
 											"name": "hnsw",
 											"engine": "lucene",
 											"space_type": "cosinesimil"
-										}
-									},
-									"productType": {
-										"properties": {
-											"uid": {
-												"type": "keyword"
-											},
-											"name": {
-												"type": "keyword",
-												"fields": {
-													"text": {
-														"type": "text"
-													}
-												}
-											}
-										}
-									},
-									"prices": {
-										"type": "nested",
-										"properties": {
-											"minOrderQty": {
-												"type": "integer"
-											},
-											"unitPrice": {
-												"type": "float"
-											}
-										}
-									},
-									"createdBy": {
-										"properties": {
-											"uid": {
-												"type": "keyword"
-											},
-											"userType": {
-												"type": "keyword"
-											}
-										}
-									},
-									"updatedBy": {
-										"properties": {
-											"uid": {
-												"type": "keyword"
-											},
-											"userType": {
-												"type": "keyword"
-											}
-										}
-									},
-									"images": {
-										"type": "nested",
-										"properties": {
-											"url": {
-												"type": "keyword"
-											},
-											"name": {
-												"type": "keyword"
-											},
-											"viewAngle": {
-												"type": "keyword"
-											},
-											"isDefault": {
-												"type": "boolean"
-											},
-											"zoomUrl": {
-												"type": "keyword"
-											},
-											"thumbnailUrl": {
-												"type": "keyword"
-											},
-											"colorName": {
-												"type": "keyword"
-											},
-											"hexCode": {
-												"type": "keyword"
-											},
-											"colorVariantValueId": {
-												"type": "keyword"
-											},
-											"imageType": {
-												"type": "keyword"
-											},
-											"placementId": {
-												"type": "keyword"
-											},
-											"compressed": {
-												"type": "boolean"
-											},
-											"size": {
-												"type": "keyword"
-											}
-										}
-									},
-									"variants": {
-										"type": "nested",
-										"properties": {
-											"label": {
-												"type": "keyword"
-											},
-											"value": {
-												"properties": {
-													"name": {
-														"type": "keyword"
-													},
-													"upcharge": {
-														"type": "float"
-													}
-												}
-											},
-											"values": {
-												"type": "nested",
-												"properties": {
-													"label": {
-														"type": "keyword"
-													},
-													"name": {
-														"type": "keyword"
-													},
-													"upcharge": {
-														"type": "float"
-													},
-													"quantity": {
-														"type": "integer"
-													}
-												}
-											}
-										}
-									},
-									"artworks": {
-										"type": "nested",
-										"properties": {
-											"url": {
-												"type": "keyword"
-											},
-											"filename": {
-												"type": "keyword"
-											},
-											"side": {
-												"type": "keyword"
-											},
-											"placementId": {
-												"type": "keyword"
-											},
-											"type": {
-												"type": "keyword"
-											},
-											"width": {
-												"type": "float"
-											},
-											"length": {
-												"type": "float"
-											},
-											"flipX": {
-												"type": "float"
-											},
-											"flipY": {
-												"type": "float"
-											},
-											"rotation": {
-												"type": "float"
-											},
-											"rotationX": {
-												"type": "float"
-											},
-											"rotationY": {
-												"type": "float"
-											},
-											"unitOfMeasurement": {
-												"type": "keyword"
-											},
-											"position": {
-												"properties": {
-													"top": {
-														"type": "float"
-													},
-													"left": {
-														"type": "float"
-													}
-												}
-											},
-											"layouts": {
-												"type": "nested",
-												"properties": {
-													"rotation": {
-														"type": "float"
-													},
-													"rotationX": {
-														"type": "float"
-													},
-													"rotationY": {
-														"type": "float"
-													},
-													"radius": {
-														"type": "float"
-													},
-													"imageFit": {
-														"type": "keyword"
-													},
-													"opacity": {
-														"type": "float"
-													},
-													"scale": {
-														"type": "float"
-													},
-													"maskImageUrl": {
-														"type": "keyword"
-													},
-													"blendMode": {
-														"type": "keyword"
-													},
-													"width": {
-														"type": "float"
-													},
-													"length": {
-														"type": "float"
-													},
-													"url": {
-														"type": "keyword"
-													},
-													"containerRatio": {
-														"properties": {
-															"x": {
-																"type": "float"
-															},
-															"y": {
-																"type": "float"
-															}
-														}
-													},
-													"outerBlock": {
-														"properties": {
-															"width": {
-																"type": "float"
-															},
-															"length": {
-																"type": "float"
-															},
-															"position": {
-																"properties": {
-																	"top": {
-																		"type": "float"
-																	},
-																	"left": {
-																		"type": "float"
-																	}
-																}
-															}
-														}
-													},
-													"layerColors": {
-														"type": "nested",
-														"properties": {
-															"type": {
-																"type": "keyword"
-															},
-															"gradientType": {
-																"type": "keyword"
-															},
-															"angle": {
-																"type": "float"
-															},
-															"colors": {
-																"type": "nested",
-																"properties": {
-																	"color": {
-																		"type": "keyword"
-																	},
-																	"opacity": {
-																		"type": "float"
-																	},
-																	"position": {
-																		"type": "float"
-																	}
-																}
-															}
-														}
-													},
-													"innerMaskPoints": {
-														"type": "nested",
-														"properties": {
-															"x": {
-																"type": "float"
-															},
-															"y": {
-																"type": "float"
-															},
-															"radius": {
-																"type": "float"
-															}
-														}
-													},
-													"maskPoints": {
-														"type": "nested",
-														"properties": {
-															"x": {
-																"type": "float"
-															},
-															"y": {
-																"type": "float"
-															},
-															"radius": {
-																"type": "float"
-															}
-														}
-													}
-												}
-											}
-										}
-									},
-									"artworkLayouts": {
-										"type": "nested",
-										"properties": {
-											"baseImageUrl": {
-												"type": "keyword"
-											},
-											"side": {
-												"type": "keyword"
-											},
-											"placementId": {
-												"type": "keyword"
-											},
-											"length": {
-												"type": "float"
-											},
-											"width": {
-												"type": "float"
-											},
-											"containerRatio": {
-												"properties": {
-													"x": {
-														"type": "float"
-													},
-													"y": {
-														"type": "float"
-													}
-												}
-											},
-											"outerBlock": {
-												"properties": {
-													"length": {
-														"type": "float"
-													},
-													"width": {
-														"type": "float"
-													},
-													"position": {
-														"properties": {
-															"top": {
-																"type": "float"
-															},
-															"left": {
-																"type": "float"
-															}
-														}
-													}
-												}
-											},
-											"types": {
-												"type": "nested",
-												"properties": {
-													"name": {
-														"type": "keyword"
-													}
-												}
-											},
-											"innerBlocks": {
-												"type": "nested",
-												"properties": {
-													"hidden": {
-														"type": "boolean"
-													},
-													"isBackground": {
-														"type": "boolean"
-													},
-													"label": {
-														"type": "keyword"
-													},
-													"placeholder": {
-														"type": "keyword"
-													},
-													"length": {
-														"type": "float"
-													},
-													"width": {
-														"type": "float"
-													},
-													"rotation": {
-														"type": "float"
-													},
-													"rotationX": {
-														"type": "float"
-													},
-													"rotationY": {
-														"type": "float"
-													},
-													"radius": {
-														"type": "float"
-													},
-													"imageFit": {
-														"type": "keyword"
-													},
-													"opacity": {
-														"type": "float"
-													},
-													"scale": {
-														"type": "float"
-													},
-													"maskImageUrl": {
-														"type": "keyword"
-													},
-													"blendMode": {
-														"type": "keyword"
-													},
-													"unitOfMeasurement": {
-														"type": "keyword"
-													},
-													"position": {
-														"properties": {
-															"top": {
-																"type": "float"
-															},
-															"left": {
-																"type": "float"
-															}
-														}
-													},
-													"layerColors": {
-														"type": "nested",
-														"properties": {
-															"type": {
-																"type": "keyword"
-															},
-															"gradientType": {
-																"type": "keyword"
-															},
-															"angle": {
-																"type": "float"
-															},
-															"colors": {
-																"type": "nested",
-																"properties": {
-																	"color": {
-																		"type": "keyword"
-																	},
-																	"opacity": {
-																		"type": "float"
-																	},
-																	"position": {
-																		"type": "float"
-																	}
-																}
-															}
-														}
-													},
-													"innerMaskPoints": {
-														"type": "nested",
-														"properties": {
-															"x": {
-																"type": "float"
-															},
-															"y": {
-																"type": "float"
-															},
-															"radius": {
-																"type": "float"
-															}
-														}
-													},
-													"maskPoints": {
-														"type": "nested",
-														"properties": {
-															"x": {
-																"type": "float"
-															},
-															"y": {
-																"type": "float"
-															},
-															"radius": {
-																"type": "float"
-															}
-														}
-													}
-												}
-											}
 										}
 									}
 								}
@@ -652,7 +318,7 @@
 					"user_inputs": {
 						"pipeline_id": "${{ search_pipeline_id }}",
 						"configurations": {
-							"description": "Hybrid score fusion for product search",
+							"description": "Hybrid score fusion for products search (lexical + semantic)",
 							"phase_results_processors": [
 								{
 									"normalization-processor": {
