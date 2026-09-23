@@ -386,8 +386,9 @@ curl -X POST "http://localhost:3015/api/v2/internal/products/reindex" \
 
 Confirm `errors: 0` and `validation.passed: true`. Validation requires `embeddingVectorCount` to
 equal `embeddingTextCount`; when it fails, `embeddingFailedCount` counts the documents the
-pipeline indexed without a vector. A run with any failed item never switches the alias. The reindex
-also refuses, with a 400, a target without `default_pipeline` or with a missing ingest pipeline.
+pipeline indexed without a vector. A run with any failed item never switches the alias. Before
+writing anything, the reindex also refuses with a 400: a target without `default_pipeline`, a missing
+ingest pipeline, an undeployed embedding model, and — with hybrid search on — a missing search pipeline.
 Spot-check a document: both `embedding_text` and `embedding_vector` must be present:
 
 ```
@@ -497,6 +498,95 @@ GET /_alias/products
 `GET /_cat/aliases/products?v` gives the same answer in table form. Check this before every
 cutover: the "old" index in the step-9 swap must be whatever this returns, not whatever the
 runbook example says.
+
+---
+
+## 11. Reindexing production
+
+A reindex rebuilds every product into a **new** index version and then moves the `products` alias
+onto it. The live index keeps serving until the switch, and the old one stays for rollback. Run it
+after a mapping change, after a change to what gets embedded ([step 12](#12-changing-what-gets-embedded)),
+or to repair an index. Schedule it outside the S&S sync window, so fewer product edits land while
+it runs.
+
+1. **Check what is live** ([step 10](#10-inspecting-whats-already-in-the-cluster)):
+   `GET /_alias/products` gives `<active_index>`. The ingest pipeline's `model_id` must match
+   `OPENSEARCH_EMBEDDING_MODEL_ID`.
+2. **Create the next version** with the production env loaded, as in [5.2](#52-run-the-provisioning-script):
+
+   ```bash
+   yarn create:products-index <target_index>     # e.g. products_v5 when products_v4 is live
+   ```
+
+   It refuses an existing name or an undeployed model, and writes nothing when it refuses.
+3. **Give it a replica.** The app creates indices with `number_of_replicas: 0`:
+
+   ```
+   PUT /<target_index>/_settings
+   { "index.number_of_replicas": 1 }
+   ```
+
+4. **Dry run, then run with the switch.** Use the commands in [step 8](#8-backfill) against the
+   service directly (port 3015), not through the API gateway: the request is synchronous and lasts
+   the whole reindex. For the real run, set `"switchAliasAfterValidation": true`. The alias moves
+   only when `errors` is 0 and every product has a vector. Otherwise `<active_index>` keeps serving,
+   and the response carries `failureSamples` and `validation.embeddingFailedCount`.
+5. **Catch-up pass.** Products edited while the reindex ran were written to `<active_index>`, and
+   their changes are missing from `<target_index>` after the switch. Run the reindex once more with
+   `{ "targetIndex": "<target_index>" }` and no switch. It rewrites every product into the index
+   that is now live. It's cheap, because `skip_existing` doesn't re-embed unchanged text, and it
+   answers `REINDEX_COMPLETED` with `aliasAlreadyOnTarget: true`.
+6. **Verify.** Search through the app ([step 9](#9-cut-the-alias-over)). Check Sentry for
+   `embedding_failed` and `bulk_item_failure` issues.
+7. **Rollback, if needed.** Point the alias back at the old index; nothing is lost:
+
+   ```
+   POST /_aliases
+   { "actions": [
+     { "remove": { "index": "<target_index>", "alias": "products" } },
+     { "add":    { "index": "<active_index>", "alias": "products" } }
+   ] }
+   ```
+
+8. After ~24h stable, `DELETE /<active_index>`.
+
+---
+
+## 12. Changing what gets embedded
+
+Everything that goes into a product's vector is decided in one function in xpress-service:
+`src/services/product/search/core/indexing/buildProductEmbeddingText.ts`. Today it embeds the name,
+price, categories (plus category synonyms when `EMBEDDING_CATEGORY_SYNONYMS_ENABLED` is on), tags,
+colour and description.
+
+1. **Edit that function** to add or remove lines, e.g. add `Brand: …` or `Material: …`, or drop
+   `Unit Price` (a number adds noise and little meaning).
+   - A field already on the search document (`brandName`, `materials`, `features`, …) only needs
+     the new line.
+   - A field that is new data from the product must also be added to
+     `core/indexing/productIndexDoc.ts`, set in `core/indexing/toProductIndexDoc.ts`, and declared
+     in `core/provisioning/productsIndexBody.ts`. The mapping is strict and rejects undeclared
+     fields, and a test fails until the field is declared.
+2. **Update** `buildProductEmbeddingText.test.ts`.
+3. **Reindex into a new version** ([step 11](#11-reindexing-production)). The text is embedded when
+   a product is written, so a changed recipe only reaches products written after it. Without a full
+   reindex, the index mixes vectors built from the old and new text, and ranking drifts. A new
+   version, not a rewrite in place, keeps validation and a one-step rollback. Each product costs one
+   model call.
+4. **Compare before switching.** Run a fixed set of real queries against both indices. Switch the
+   alias only if results improve.
+
+Most relevance problems don't need a reindex. Check this table first:
+
+| Change | Where (xpress-service, `src/services/product/search/`) | Needs a reindex? |
+| --- | --- | --- |
+| What goes into the vector | `core/indexing/buildProductEmbeddingText.ts` | **Yes**, new version |
+| `EMBEDDING_CATEGORY_SYNONYMS_ENABLED` | app env | **Yes**: it changes the embedded text |
+| A new searchable or filterable field | `toProductIndexDoc.ts`, `productsIndexBody.ts`, `core/query/*` | **Yes**, new version |
+| Keyword boosts, searched fields, synonyms | `core/query/buildLexicalQuery.ts`, `core/query/synonyms.ts` | No: takes effect at query time |
+| Keyword vs semantic balance | `HYBRID_LEXICAL_WEIGHT` / `HYBRID_SEMANTIC_WEIGHT`, then `yarn create:search-pipeline` | No |
+
+When several embedding changes are planned, ship them together in one reindex.
 
 ---
 
