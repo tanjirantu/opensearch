@@ -286,10 +286,6 @@ index's vectors from the next write on, while stored ones keep the old model: se
 across two embedding spaces until a full reindex. It is refused unless you pass
 `--allow-model-change`, and should be followed by a reindex.
 
-> `workflow-template.json` still provisions the two pipelines through Flow Framework, with the
-> same definitions, but not the index. It is not part of this runbook, and 5.2 overwrites both
-> pipelines with the app's definitions either way.
-
 ---
 
 ## 6. Verify and smoke-test
@@ -464,7 +460,8 @@ left over from earlier attempts — more than one `DEPLOYED` embedding model is 
 was built with exactly one of them, and querying with the other returns nonsense rankings.
 
 **Workflows** — only on clusters provisioned through Flow Framework before the app took over.
-List them, to recover a `workflow_id`:
+This repo no longer ships a workflow template, but an older cluster can still hold the workflow
+that created its index and pipelines. List them, to recover a `workflow_id`:
 
 ```
 GET /_plugins/_flow_framework/workflow/_search
@@ -480,6 +477,14 @@ authoritative answer to "which index, ingest pipeline and search pipeline does t
 
 ```
 GET /_plugins/_flow_framework/workflow/<workflow_id>/_status
+```
+
+**Never call `_deprovision` on such a workflow.** It deletes every resource the workflow created,
+which on an older cluster can include the live index and both pipelines. To drop only the
+leftover workflow record, leaving its resources in place, delete the workflow itself:
+
+```
+DELETE /_plugins/_flow_framework/workflow/<workflow_id>
 ```
 
 **Index settings** — confirm `index.knn`, `default_pipeline`, `number_of_replicas` and the
