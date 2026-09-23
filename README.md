@@ -272,7 +272,8 @@ It stops at the first failure, and every refusal comes before its first write:
    when it was created;
 2. checks that `OPENSEARCH_EMBEDDING_MODEL_ID` exists on this cluster and is `DEPLOYED`;
 3. creates or replaces the ingest pipeline (**refusing** to switch an existing one to a different
-   model), then the search pipeline when `OPENSEARCH_HYBRID_SEARCH_PIPELINE` is set, then the index;
+   model), then the search pipeline if `OPENSEARCH_HYBRID_SEARCH_PIPELINE` is set and it does not
+   exist yet (an existing one is left unchanged), then the index;
 4. reads the live index back and checks the vector dimension, `hnsw` / `lucene` / `cosinesimil`,
    and `default_pipeline`;
 5. on a fresh cluster with no `products` alias, points the alias at the new, empty index, so
@@ -513,12 +514,13 @@ runbook example says.
   and `prices` are `enabled: false`: kept in `_source`, never parsed. Mapped dynamically they added
   140 guessed fields and rejected real products on `long`/`float` conflicts inside
   `artworkLayouts.fulfillEngine`.
-- **Search pipeline weights.** Only the provisioning scripts (`yarn create:products-index`,
-  `yarn create:search-pipeline`) write the search pipeline, using `HYBRID_LEXICAL_WEIGHT` /
-  `HYBRID_SEMANTIC_WEIGHT`; the reindex no longer touches it. Each weight must be in [0, 1] and
-  the two must add up to 1. A blank value means the default (0.6 / 0.4); anything malformed is
-  refused before the scripts write anything. A pipeline retuned by hand is overwritten the next
-  time a script runs unless those env vars match it.
+- **Search pipeline weights.** `yarn create:search-pipeline` is the one way to change the search
+  pipeline: it writes `HYBRID_LEXICAL_WEIGHT` / `HYBRID_SEMANTIC_WEIGHT` into it, replacing
+  whatever is there. `yarn create:products-index` creates the pipeline only when it is missing,
+  and the reindex never writes it. With hybrid search on, the reindex refuses (400) to run while
+  the pipeline is missing. Each weight must be in [0, 1] and the two must add up to 1, with
+  OpenSearch's 0.01 of slack. A blank value means the default (0.6 / 0.4), and anything
+  malformed is refused before a script writes anything.
 - **Client-side embedding vars are legacy.** `EMBEDDING_ENABLED`, `EMBEDDING_MODEL`,
   `EMBEDDING_SERVICE_URL` predate cluster-side inference. Embeddings are generated in OpenSearch;
   leave `EMBEDDING_ENABLED` unset.
