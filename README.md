@@ -513,10 +513,12 @@ runbook example says.
   and `prices` are `enabled: false`: kept in `_source`, never parsed. Mapped dynamically they added
   140 guessed fields and rejected real products on `long`/`float` conflicts inside
   `artworkLayouts.fulfillEngine`.
-- **Weight-overwrite warning.** Both `yarn create:products-index` and the reindex
-  (`ensureHybridPipelineExists()`) PUT the search pipeline using `HYBRID_LEXICAL_WEIGHT` /
-  `HYBRID_SEMANTIC_WEIGHT`. A pipeline retuned by hand is silently overwritten on the next run
-  unless those env vars match it.
+- **Search pipeline weights.** Only the provisioning scripts (`yarn create:products-index`,
+  `yarn create:search-pipeline`) write the search pipeline, using `HYBRID_LEXICAL_WEIGHT` /
+  `HYBRID_SEMANTIC_WEIGHT`; the reindex no longer touches it. Each weight must be in [0, 1] and
+  the two must add up to 1. A blank value means the default (0.6 / 0.4); anything malformed is
+  refused before the scripts write anything. A pipeline retuned by hand is overwritten the next
+  time a script runs unless those env vars match it.
 - **Client-side embedding vars are legacy.** `EMBEDDING_ENABLED`, `EMBEDDING_MODEL`,
   `EMBEDDING_SERVICE_URL` predate cluster-side inference. Embeddings are generated in OpenSearch;
   leave `EMBEDDING_ENABLED` unset.
