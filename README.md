@@ -1,16 +1,36 @@
 # OpenSearch Setup
 
 End-to-end runbook for the hybrid product search cluster: start the cluster, deploy an
-embedding model, provision the **index + ingest pipeline + search pipeline**, backfill from
-the app, and cut the `products` alias over.
+embedding model, provision the **ingest pipeline + search pipeline + index** from the app
+(`yarn create:products-index`), backfill from the app, and cut the `products` alias over.
 
 Steps 2 onward run in **OpenSearch Dashboards → Dev Tools** (`http://localhost:5601/app/dev_tools`)
 unless a step says otherwise.
 
 > **Alias vs. index.** The alias is always `products`. Concrete indices are versioned
-> (`products_v3`, `products_v4`, …) and bumped on every mapping change — analysis settings are
-> static on a live index, so a new analyzer means a new index plus a reindex. The examples below
-> provision `products_v4` and cut the alias over from `products_v3`.
+> (`products_v1`, `products_v2`, …) and bumped on every mapping change — analysis settings are
+> static on a live index, so a new analyzer means a new index plus a reindex. Every step below
+> provisions `<target_index>` and cuts the alias over from `<active_index>`; nothing in this
+> runbook is specific to a particular version number.
+
+### Placeholders
+
+Substitute these throughout — they are the only values that change between runs. Nothing else in
+this document should be edited to fit your cluster.
+
+| Placeholder | What it is | Where it comes from |
+| --- | --- | --- |
+| `<embedding_model>` | Remote embedding model, e.g. `text-embedding-3-small` | You choose it — step 3 |
+| `<active_index>` | Concrete index currently behind the `products` alias | `GET /_alias/products` (step 10) |
+| `<target_index>` | New index you are provisioning this cycle | You choose it — next version number |
+| `<connector_id>` | Remote model connector | Response to step 3, or step 10 |
+| `<model_id>` | Deployed embedding model | Completed task in step 4, or step 10 |
+| `<task_id>` | Async model-deployment task | Response to step 4 |
+| `<OPENAI_API_KEY>` | Embedding-provider API key | Your provider account — never commit it |
+| `<GATEWAY_SHARED_TOKEN>` | `x-gateway-token` for the app's internal reindex endpoint | `GATEWAY_SHARED_TOKEN` in the app env |
+
+The pipeline ids (`products-embedding-ingest`, `products-hybrid-pipeline`) are conventions, not
+placeholders — keep them stable, except per-environment suffixes (see Notes).
 
 ---
 
@@ -106,22 +126,41 @@ for the two-identity split.
 
 ## 3. Create remote model connector
 
-> **Dimension contract.** The model's output dimension must be **1536** — it must match
-> `EMBEDDING_DIMENSION` in the app and the `embedding_vector` dimension in
-> `workflow-template.json`. `text-embedding-3-small` is 1536. This cannot change in place once
-> indexing has begun.
+The connector is the cluster's handle on a remote embedding API. The example below is OpenAI; any
+provider whose endpoint matches `trusted_connector_endpoints_regex` from step 2 works the same way
+— only `url`, `request_body` and the pre/post-process functions change.
 
-Replace `<OPENAI_API_KEY>` with your key.
+> **Dimension contract — decide this before anything else.** Whatever model you pick, its output
+> dimension must equal the app's `EMBEDDING_DIMENSION` (default **1536**), which
+> `productsIndexBody.ts` uses for `embedding_vector.dimension`. It cannot change in place once
+> indexing has begun: a different dimension means a new index and a reindex.
+
+Common OpenAI choices:
+
+| Model | Native dimension | Note |
+| --- | --- | --- |
+| `text-embedding-3-small` | 1536 | Matches the default `EMBEDDING_DIMENSION` |
+| `text-embedding-3-large` | 3072 | Either set `EMBEDDING_DIMENSION=3072`, or truncate — see below |
+
+`text-embedding-3-*` models accept a `dimensions` parameter, so a larger model can be pinned back
+to the committed 1536 by adding it to the request body (OpenAI truncates server-side and the
+vectors stay usable):
+
+```
+"request_body": "{ \"input\": ${parameters.input}, \"model\": \"${parameters.model}\", \"dimensions\": 1536 }"
+```
+
+Replace `<OPENAI_API_KEY>` with your key, and `<embedding_model>` with the model you chose:
 
 ```
 POST /_plugins/_ml/connectors/_create
 {
   "name": "OpenAI Embeddings Connector",
-  "description": "Connector for OpenAI text-embedding-3-small",
+  "description": "Connector for OpenAI <embedding_model>",
   "version": 1,
   "protocol": "http",
   "parameters": {
-    "model": "text-embedding-3-small"
+    "model": "<embedding_model>"
   },
   "credential": {
     "openAI_key": "<OPENAI_API_KEY>"
@@ -148,12 +187,14 @@ Save the `connector_id` from the response.
 
 ## 4. Register and deploy the model
 
-Replace `<connector_id>` with the value from step 3.
+Replace `<connector_id>` with the value from step 3. The `name` you give here is what step 10
+searches on, so make it descriptive and unique — it is the only human-readable handle on the
+model once the response scrolls away.
 
 ```
 POST /_plugins/_ml/models/_register?deploy=true
 {
-  "name": "OpenAI text-embedding-3-small",
+  "name": "OpenAI <embedding_model>",
   "function_name": "remote",
   "description": "Remote OpenAI text embedding model",
   "connector_id": "<connector_id>"
@@ -175,50 +216,75 @@ POST /_plugins/_ml/models/<model_id>/_predict
 { "parameters": { "input": ["test embedding verification"] } }
 ```
 
-Confirm `"model_state": "DEPLOYED"`, `shape: [1536]`, and a non-empty `data` array.
-**If `_predict` fails, stop here — step 5 will provision an index that can never be populated.**
+Confirm `"model_state": "DEPLOYED"`, a `shape` matching your `EMBEDDING_DIMENSION`, and a
+non-empty `data` array.
+**If `_predict` fails, stop here.** Step 5 checks that the model is `DEPLOYED`, but not that
+inference actually works.
 
 ---
 
-## 5. Provision the index pipeline
+## 5. Provision from the app
 
-This is the main event: one Flow Framework template creates all three cluster-side resources
-together — the **ingest pipeline** (`embedding_text → embedding_vector` at index time), the
-**KNN index**, and the **hybrid search pipeline** (score fusion at query time).
+The app owns every cluster-side resource except the model: the **ingest pipeline**
+(`embedding_text → embedding_vector` at index time), the **hybrid search pipeline** (score fusion
+at query time) and the **index** itself. Their definitions live in `xpress-service`
+(`core/provisioning/` for the definitions, `service/createProductsIngestPipeline.ts` and
+`service/createHybridSearchPipeline.ts` for the provisioning steps), so a new environment is
+provisioned from source.
 
-### 5.1 Create the workflow
+### 5.1 Set the app env
 
-```
-POST /_plugins/_flow_framework/workflow
-```
+Set these in `xpress-service`. The script in 5.2 reads them, and so does the app at runtime:
 
-Body: the entire contents of [`workflow-template.json`](./workflow-template.json). Save the
-returned `workflow_id`.
+```env
+OPENSEARCH_NODE=https://localhost:9200
+OPENSEARCH_USER=...
+OPENSEARCH_PASSWORD=...
+OPENSEARCH_SSL_VERIFY=false            # true once real certs are in place
 
-### 5.2 Provision it
+OPENSEARCH_PRODUCTS_ALIAS=products
+OPENSEARCH_INGEST_PIPELINE=products-embedding-ingest
 
-```
-POST /_plugins/_flow_framework/workflow/<workflow_id>/_provision
-{
-  "model_id":           "<model_id from step 4>",
-  "index_name":         "products_v4",
-  "ingest_pipeline_id": "products-embedding-ingest",
-  "search_pipeline_id": "products-hybrid-pipeline"
-}
-```
+OPENSEARCH_HYBRID_ENABLED=true
+OPENSEARCH_HYBRID_SEARCH_PIPELINE=products-hybrid-pipeline
+OPENSEARCH_EMBEDDING_MODEL_ID=<model_id from step 4>
+OPENSEARCH_HYBRID_K=100
+HYBRID_LEXICAL_WEIGHT=0.6     # written into the search pipeline by 5.2
+HYBRID_SEMANTIC_WEIGHT=0.4    # written into the search pipeline by 5.2
+EMBEDDING_DIMENSION=1536      # must match the model (step 3)
 
-The names must match the app env vars in step 7 — `OPENSEARCH_PRODUCTS_TARGET_INDEX`,
-`OPENSEARCH_INGEST_PIPELINE`, `OPENSEARCH_HYBRID_SEARCH_PIPELINE`.
-
-### 5.3 Poll until complete
-
-```
-GET /_plugins/_flow_framework/workflow/<workflow_id>/_status
+SEARCH_INDEXED_SELLER_UIDS=<comma-separated seller uids>
 ```
 
-Repeat until `state: "COMPLETED"`. On `FAILED`, the `error` field names the failing node;
-de-provision (`POST /_plugins/_flow_framework/workflow/<workflow_id>/_deprovision`) before
-retrying, otherwise the half-created resources block the rerun.
+`SEARCH_INDEXED_SELLER_UIDS` is **fail-closed**: unset means nothing is indexed at all.
+
+### 5.2 Run the provisioning script
+
+From `xpress-service`:
+
+```bash
+yarn create:products-index <target_index>
+```
+
+It stops at the first failure, and every refusal comes before its first write:
+
+1. **refuses a `<target_index>` that already exists**, because its mapping and settings were fixed
+   when it was created;
+2. checks that `OPENSEARCH_EMBEDDING_MODEL_ID` exists on this cluster and is `DEPLOYED`;
+3. creates or replaces the ingest pipeline (**refusing** to switch an existing one to a different
+   model), then the search pipeline if `OPENSEARCH_HYBRID_SEARCH_PIPELINE` is set and it does not
+   exist yet (an existing one is left unchanged), then the index;
+4. reads the live index back and checks the vector dimension, `hnsw` / `lucene` / `cosinesimil`,
+   and `default_pipeline`;
+5. on a fresh cluster with no `products` alias, points the alias at the new, empty index, so
+   search returns no hits instead of `index_not_found` and the upsert consumer can start filling
+   it. An existing alias is left for step 9 to switch.
+
+`yarn create:ingest-pipeline` recreates only the ingest pipeline, e.g. after a processor change.
+The pipeline is shared by every products index, so **changing the model** changes the live
+index's vectors from the next write on, while stored ones keep the old model: search then scores
+across two embedding spaces until a full reindex. It is refused unless you pass
+`--allow-model-change`, and should be followed by a reindex.
 
 ---
 
@@ -227,38 +293,43 @@ retrying, otherwise the half-created resources block the rerun.
 ```
 GET /_ingest/pipeline/products-embedding-ingest
 GET /_search/pipeline/products-hybrid-pipeline
-GET /products_v4/_mapping
-GET /products_v4/_settings
+GET /<target_index>/_mapping
+GET /<target_index>/_settings
 ```
 
 Confirm:
 
-- the ingest pipeline has a `text_embedding` processor with `field_map: { embedding_text: embedding_vector }`;
+- the ingest pipeline has a `text_embedding` processor with `field_map: { embedding_text: embedding_vector }`,
+  `skip_existing: true`, and an `on_failure` that sets `embedding_failed: true`;
 - the search pipeline has a `normalization-processor` (`min_max` / `arithmetic_mean`, weights `[0.6, 0.4]`);
 - the index has `index.knn: true`, `default_pipeline: products-embedding-ingest`, and the
   `sku_trigram` / `english_stem` analyzers under `analysis`;
-- `embedding_vector` is a `knn_vector` of **dimension 1536** (`hnsw` / `lucene` / `cosinesimil`);
-- `skus` is `text` with `analyzer: sku_trigram` and a `skus.keyword` subfield.
+- `embedding_vector` is a `knn_vector` of the dimension fixed in step 3 (`hnsw` / `lucene` / `cosinesimil`);
+- `skus` is `text` with `analyzer: sku_trigram` and a `skus.keyword` subfield;
+- the mapping is `"dynamic": "strict"`, and `artworks`, `artworkLayouts`, `variants`, `images`
+  and `prices` are `{"type": "object", "enabled": false}` with no sub-properties.
 
 **Ingest smoke test** — proves OpenSearch generates the vector, not the app:
 
 ```
-POST /products_v4/_doc/test-smoke
+POST /<target_index>/_doc/test-smoke
 { "name": "Smoke Test Product", "sellerUid": "test", "isActive": true, "embedding_text": "Classic cotton polo shirt" }
 
-GET /products_v4/_doc/test-smoke
+GET /<target_index>/_doc/test-smoke
 ```
 
-`embedding_vector` must be a non-empty 1536-element array. Then clean up:
+`embedding_vector` must be a non-empty array of exactly `EMBEDDING_DIMENSION` elements. If the
+document has `embedding_failed: true` and no vector instead, the model call failed; recheck
+step 4's `_predict`. Then clean up:
 
 ```
-DELETE /products_v4/_doc/test-smoke
+DELETE /<target_index>/_doc/test-smoke
 ```
 
 **Hybrid smoke test:**
 
 ```
-GET /products_v4/_search?search_pipeline=products-hybrid-pipeline
+GET /<target_index>/_search?search_pipeline=products-hybrid-pipeline
 {
   "query": { "hybrid": { "queries": [
     { "match": { "name": "polo shirt" } },
@@ -271,43 +342,11 @@ Re-index the smoke doc first if you already deleted it; confirm `hits.hits` is n
 
 ---
 
-## 7. Point the app at it
+## 7. Restart the app
 
-Set these in `xpress-service` and redeploy/restart:
-
-```env
-OPENSEARCH_NODE=https://localhost:9200
-OPENSEARCH_USER=...
-OPENSEARCH_PASSWORD=...
-OPENSEARCH_SSL_VERIFY=false            # true once real certs are in place
-
-OPENSEARCH_PRODUCTS_ALIAS=products
-OPENSEARCH_PRODUCTS_ACTIVE_INDEX=products_v3     # currently behind the alias
-OPENSEARCH_PRODUCTS_TARGET_INDEX=products_v4     # provisioned in step 5
-OPENSEARCH_INGEST_PIPELINE=products-embedding-ingest
-
-OPENSEARCH_HYBRID_ENABLED=true
-OPENSEARCH_HYBRID_SEARCH_PIPELINE=products-hybrid-pipeline
-OPENSEARCH_EMBEDDING_MODEL_ID=<model_id from step 4>
-OPENSEARCH_HYBRID_K=100
-HYBRID_LEXICAL_WEIGHT=0.6     # must match the provisioned search pipeline
-HYBRID_SEMANTIC_WEIGHT=0.4    # must match the provisioned search pipeline
-EMBEDDING_DIMENSION=1536      # must match the model + index knn_vector dimension
-
-SEARCH_INDEXED_SELLER_UIDS=<comma-separated seller uids>
-```
-
-`SEARCH_INDEXED_SELLER_UIDS` is **fail-closed** — unset means nothing is indexed at all.
-
-> **Alternative to step 5 — read the caveats first.** `yarn create:products-index products_v4`
-> creates the index from the app's own mappings without Flow Framework. It does **not** create the
-> ingest or search pipelines, it omits the explicit `method` on `embedding_vector` (see Notes),
-> and — most importantly — **it does not set `default_pipeline` on the index.** The reindex sends
-> no `pipeline` parameter on its bulk requests, so vectors are generated *only* by the index's
-> `default_pipeline`. Creating the ingest pipeline separately is not enough: the entire step-8
-> backfill will run, produce no `embedding_vector`, and then fail validation on
-> `embeddingVectorPresent`. If you take this path, `PUT /products_v4/_settings` with
-> `{"index.default_pipeline": "products-embedding-ingest"}` before backfilling. Prefer step 5.
+Restart or redeploy `xpress-service` so search and the `sellable.product.upserted` consumer pick up
+the env from step 5.1. The consumer writes through the alias with `require_alias`, so it never
+creates an index. On a cluster with no alias its writes fail and are reported to Sentry.
 
 ---
 
@@ -323,7 +362,7 @@ Dry run first:
 curl -X POST "http://localhost:3015/api/v2/internal/products/reindex" \
   -H "Content-Type: application/json" \
   -H "x-gateway-token: <GATEWAY_SHARED_TOKEN>" \
-  -d '{ "targetIndex": "products_v4", "dryRun": true }'
+  -d '{ "targetIndex": "<target_index>", "dryRun": true }'
 ```
 
 Confirm the estimated document count looks right, then run it:
@@ -333,7 +372,7 @@ curl -X POST "http://localhost:3015/api/v2/internal/products/reindex" \
   -H "Content-Type: application/json" \
   -H "x-gateway-token: <GATEWAY_SHARED_TOKEN>" \
   -d '{
-    "targetIndex": "products_v4",
+    "targetIndex": "<target_index>",
     "alias": "products",
     "batchSize": 200,
     "validateAfterIndex": true,
@@ -341,24 +380,31 @@ curl -X POST "http://localhost:3015/api/v2/internal/products/reindex" \
   }'
 ```
 
-Confirm `errors: 0` and `validation.passed: true`, then spot-check a document — both
-`embedding_text` and `embedding_vector` must be present:
+Confirm `errors: 0` and `validation.passed: true`. Validation requires `embeddingVectorCount` to
+equal `embeddingTextCount`; when it fails, `embeddingFailedCount` counts the documents the
+pipeline indexed without a vector. A run with any failed item never switches the alias. Before
+writing anything, the reindex also refuses with a 400: a target without `default_pipeline`, a missing
+ingest pipeline, an undeployed embedding model, and — with hybrid search on — a missing search pipeline.
+Spot-check a document: both `embedding_text` and `embedding_vector` must be present:
 
 ```
-GET /products_v4/_doc/<known_product_uid>
+GET /<target_index>/_doc/<known_product_uid>
 ```
 
 ---
 
 ## 9. Cut the alias over
 
-Either pass `switchAliasAfterValidation: true` on the reindex call, or switch by hand:
+Either pass `switchAliasAfterValidation: true` on the reindex call, or switch by hand. Confirm
+the current target first (`GET /_alias/products`, see [step 10](#10-inspecting-whats-already-in-the-cluster))
+and name *that* index in the `remove` action — a `remove` naming an index the alias is not on
+fails the whole atomic request, and the alias never moves:
 
 ```
 POST /_aliases
 { "actions": [
-  { "remove": { "index": "products_v3", "alias": "products" } },
-  { "add":    { "index": "products_v4", "alias": "products" } }
+  { "remove": { "index": "<active_index>", "alias": "products" } },
+  { "add":    { "index": "<target_index>", "alias": "products" } }
 ] }
 
 GET /_cat/aliases/products?v
@@ -371,40 +417,205 @@ confirming `debug.mode === "hybrid"` in non-prod:
 curl "http://localhost:3015/api/v2/products/search?q=polo+shirt&sellerUid=<seller_uid>"
 ```
 
-Then set `OPENSEARCH_PRODUCTS_ACTIVE_INDEX=products_v4` for the next cycle, and after ~24h
-stable, drop the old index:
+After ~24h stable, drop the old index:
 
 ```
-DELETE /products_v3
+DELETE /<active_index>
 ```
+
+---
+
+## 10. Inspecting what's already in the cluster
+
+Everything created in steps 3–5 is stored cluster-side and survives restarts, so on a cluster you
+did not provision yourself — or after losing the ids you were told to save — look them up rather
+than recreating them. Recreating a connector or model produces a *second* copy with a new id.
+
+**Connectors** — list every one, to recover a `connector_id`:
+
+```
+POST /_plugins/_ml/connectors/_search
+{
+  "query": {
+    "match_all": {}
+  }
+}
+```
+
+**Models** — find one by name, to recover its `model_id` and confirm `model_state: "DEPLOYED"`:
+
+```
+POST /_plugins/_ml/models/_search
+{
+  "query": {
+    "match": {
+      "name": "OpenAI <embedding_model>"
+    }
+  }
+}
+```
+
+Match on the `name` you registered in step 4. Swap in `match_all` to list everything, including models
+left over from earlier attempts — more than one `DEPLOYED` embedding model is a smell: the index
+was built with exactly one of them, and querying with the other returns nonsense rankings.
+
+**Workflows** — only on clusters provisioned through Flow Framework before the app took over.
+This repo no longer ships a workflow template, but an older cluster can still hold the workflow
+that created its index and pipelines. List them, to recover a `workflow_id`:
+
+```
+GET /_plugins/_flow_framework/workflow/_search
+{
+  "query": {
+    "match_all": {}
+  }
+}
+```
+
+Then check what a given workflow actually created. Its `resources_created` array is the
+authoritative answer to "which index, ingest pipeline and search pipeline does this workflow own":
+
+```
+GET /_plugins/_flow_framework/workflow/<workflow_id>/_status
+```
+
+**Never call `_deprovision` on such a workflow.** It deletes every resource the workflow created,
+which on an older cluster can include the live index and both pipelines. To drop only the
+leftover workflow record, leaving its resources in place, delete the workflow itself:
+
+```
+DELETE /_plugins/_flow_framework/workflow/<workflow_id>
+```
+
+**Index settings** — confirm `index.knn`, `default_pipeline`, `number_of_replicas` and the
+analyzers on a concrete index:
+
+```
+GET /<target_index>/_settings
+```
+
+**Alias** — which concrete index is `products` currently pointing at:
+
+```
+GET /_alias/products
+```
+
+`GET /_cat/aliases/products?v` gives the same answer in table form. Check this before every
+cutover: the "old" index in the step-9 swap must be whatever this returns, not whatever the
+runbook example says.
+
+---
+
+## 11. Reindexing production
+
+A reindex rebuilds every product into a **new** index version and then moves the `products` alias
+onto it. The live index keeps serving until the switch, and the old one stays for rollback. Run it
+after a mapping change, after a change to what gets embedded ([step 12](#12-changing-what-gets-embedded)),
+or to repair an index. Schedule it outside the S&S sync window, so fewer product edits land while
+it runs.
+
+1. **Check what is live** ([step 10](#10-inspecting-whats-already-in-the-cluster)):
+   `GET /_alias/products` gives `<active_index>`. The ingest pipeline's `model_id` must match
+   `OPENSEARCH_EMBEDDING_MODEL_ID`.
+2. **Create the next version** with the production env loaded, as in [5.2](#52-run-the-provisioning-script):
+
+   ```bash
+   yarn create:products-index <target_index>     # e.g. products_v5 when products_v4 is live
+   ```
+
+   It refuses an existing name or an undeployed model, and writes nothing when it refuses.
+3. **Give it a replica.** The app creates indices with `number_of_replicas: 0`:
+
+   ```
+   PUT /<target_index>/_settings
+   { "index.number_of_replicas": 1 }
+   ```
+
+4. **Dry run, then run with the switch.** Use the commands in [step 8](#8-backfill) against the
+   service directly (port 3015), not through the API gateway: the request is synchronous and lasts
+   the whole reindex. For the real run, set `"switchAliasAfterValidation": true`. The alias moves
+   only when `errors` is 0 and every product has a vector. Otherwise `<active_index>` keeps serving,
+   and the response carries `failureSamples` and `validation.embeddingFailedCount`.
+5. **Catch-up pass.** Products edited while the reindex ran were written to `<active_index>`, and
+   their changes are missing from `<target_index>` after the switch. Run the reindex once more with
+   `{ "targetIndex": "<target_index>" }` and no switch. It rewrites every product into the index
+   that is now live. It's cheap, because `skip_existing` doesn't re-embed unchanged text, and it
+   answers `REINDEX_COMPLETED` with `aliasAlreadyOnTarget: true`.
+6. **Verify.** Search through the app ([step 9](#9-cut-the-alias-over)). Check Sentry for
+   `embedding_failed` and `bulk_item_failure` issues.
+7. **Rollback, if needed.** Point the alias back at the old index; nothing is lost:
+
+   ```
+   POST /_aliases
+   { "actions": [
+     { "remove": { "index": "<target_index>", "alias": "products" } },
+     { "add":    { "index": "<active_index>", "alias": "products" } }
+   ] }
+   ```
+
+8. After ~24h stable, `DELETE /<active_index>`.
+
+---
+
+## 12. Changing what gets embedded
+
+Everything that goes into a product's vector is decided in one function in xpress-service:
+`src/services/product/search/core/indexing/buildProductEmbeddingText.ts`. Today it embeds the name,
+price, categories (plus category synonyms when `EMBEDDING_CATEGORY_SYNONYMS_ENABLED` is on), tags,
+colour and description.
+
+1. **Edit that function** to add or remove lines, e.g. add `Brand: …` or `Material: …`, or drop
+   `Unit Price` (a number adds noise and little meaning).
+   - A field already on the search document (`brandName`, `materials`, `features`, …) only needs
+     the new line.
+   - A field that is new data from the product must also be added to
+     `core/indexing/productIndexDoc.ts`, set in `core/indexing/toProductIndexDoc.ts`, and declared
+     in `core/provisioning/productsIndexBody.ts`. The mapping is strict and rejects undeclared
+     fields, and a test fails until the field is declared.
+2. **Update** `buildProductEmbeddingText.test.ts`.
+3. **Reindex into a new version** ([step 11](#11-reindexing-production)). The text is embedded when
+   a product is written, so a changed recipe only reaches products written after it. Without a full
+   reindex, the index mixes vectors built from the old and new text, and ranking drifts. A new
+   version, not a rewrite in place, keeps validation and a one-step rollback. Each product costs one
+   model call.
+4. **Compare before switching.** Run a fixed set of real queries against both indices. Switch the
+   alias only if results improve.
+
+Most relevance problems don't need a reindex. Check this table first:
+
+| Change | Where (xpress-service, `src/services/product/search/`) | Needs a reindex? |
+| --- | --- | --- |
+| What goes into the vector | `core/indexing/buildProductEmbeddingText.ts` | **Yes**, new version |
+| `EMBEDDING_CATEGORY_SYNONYMS_ENABLED` | app env | **Yes**: it changes the embedded text |
+| A new searchable or filterable field | `toProductIndexDoc.ts`, `productsIndexBody.ts`, `core/query/*` | **Yes**, new version |
+| Keyword boosts, searched fields, synonyms | `core/query/buildLexicalQuery.ts`, `core/query/synonyms.ts` | No: takes effect at query time |
+| Keyword vs semantic balance | `HYBRID_LEXICAL_WEIGHT` / `HYBRID_SEMANTIC_WEIGHT`, then `yarn create:search-pipeline` | No |
+
+When several embedding changes are planned, ship them together in one reindex.
 
 ---
 
 ## Notes
 
-- **Mapping source of truth** is `xpress-service/src/services/product/search/repository/productMappings.ts`.
-  The `create_index` node in `workflow-template.json` mirrors `productsIndexMappingV2` field for
-  field; regenerate it whenever that file changes, or a workflow-provisioned index will not serve
-  the current query builder.
-- **Known divergence.** `productMappings.ts` declares `embedding_vector` with no `method`, so
-  `yarn create:products-index` gets OpenSearch's defaults (faiss / l2) while this template pins
-  `hnsw` / `lucene` / `cosinesimil`. The two provisioning paths therefore produce different vector
-  spaces for the same index name. Prefer the workflow template until `productMappings.ts` pins the
-  method too.
-- **`number_of_replicas: 0`** is mirrored from `productMappings.ts` and is fine for local and
+- **Single source of truth.** The index body is
+  `xpress-service/src/services/product/search/core/provisioning/productsIndexBody.ts`, and the
+  ingest pipeline is `getIngestPipelineBody.ts` next to it. Nothing here defines the index any more. The mapping
+  is `strict` and pins the vector method (`hnsw` / `lucene` / `cosinesimil`).
+- **`number_of_replicas: 0`** is set in `productsIndexBody.ts` and is fine for local and
   single-node environments. Before an alias cutover makes an index the production search target,
-  raise it (`PUT /products_v4/_settings {"index.number_of_replicas": 1}`) — with no replica, one
+  raise it (`PUT /<target_index>/_settings {"index.number_of_replicas": 1}`) — with no replica, one
   data-node restart takes `products` red and search starts returning 503s.
-- **Object blobs are dynamically mapped.** `artworks`, `artworkLayouts`, `variants`, `images` and
-  `prices` are mapped `{"type": "object", "enabled": true}` to mirror `productMappings.ts`, even
-  though `ProductIndexDoc` documents them as response-payload only. `enabled: true` means their
-  subfields are dynamically mapped and indexed, so a backfill can hit `mapper_parsing_exception`
-  when a later document's subfield type conflicts with the first document's, and the artwork trees
-  count against `index.mapping.total_fields.limit`. Switching to `enabled: false` is the right fix
-  but must land in `productMappings.ts` and here together, or the two provisioning paths diverge.
-- **Weight-overwrite warning.** The reindex calls `ensureHybridPipelineExists()`, which PUTs the
-  search pipeline using `HYBRID_LEXICAL_WEIGHT` / `HYBRID_SEMANTIC_WEIGHT`. If those don't match
-  what step 5 provisioned, the reindex silently overwrites the pipeline. Keep them aligned.
+- **Response-only objects are not mapped.** `artworks`, `artworkLayouts`, `variants`, `images`
+  and `prices` are `enabled: false`: kept in `_source`, never parsed. Mapped dynamically they added
+  140 guessed fields and rejected real products on `long`/`float` conflicts inside
+  `artworkLayouts.fulfillEngine`.
+- **Search pipeline weights.** `yarn create:search-pipeline` is the one way to change the search
+  pipeline: it writes `HYBRID_LEXICAL_WEIGHT` / `HYBRID_SEMANTIC_WEIGHT` into it, replacing
+  whatever is there. `yarn create:products-index` creates the pipeline only when it is missing,
+  and the reindex never writes it. With hybrid search on, the reindex refuses (400) to run while
+  the pipeline is missing. Each weight must be in [0, 1] and the two must add up to 1, with
+  OpenSearch's 0.01 of slack. A blank value means the default (0.6 / 0.4), and anything
+  malformed is refused before a script writes anything.
 - **Client-side embedding vars are legacy.** `EMBEDDING_ENABLED`, `EMBEDDING_MODEL`,
   `EMBEDDING_SERVICE_URL` predate cluster-side inference. Embeddings are generated in OpenSearch;
   leave `EMBEDDING_ENABLED` unset.
@@ -413,7 +624,7 @@ DELETE /products_v3
 
 ### Updating the search pipeline alone
 
-To retune weights without re-running the whole workflow, PUT the search pipeline directly — it is
+To retune weights without re-provisioning, PUT the search pipeline directly — it is
 idempotent and stored in the cluster, so it survives restarts and needs no recreation on deploy.
 This is what `yarn create:search-pipeline` (`src/scripts/createSearchPipeline.ts`) does.
 
