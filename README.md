@@ -228,8 +228,8 @@ inference actually works.
 The app owns every cluster-side resource except the model: the **ingest pipeline**
 (`embedding_text → embedding_vector` at index time), the **hybrid search pipeline** (score fusion
 at query time) and the **index** itself. Their definitions live in `xpress-service`
-(`repository/ingestPipeline.ts`, `repository/searchPipeline.ts`,
-`repository/productsIndexBody.ts`), so a new environment is
+(`core/provisioning/` for the definitions, `service/createProductsIngestPipeline.ts` and
+`service/createHybridSearchPipeline.ts` for the provisioning steps), so a new environment is
 provisioned from source.
 
 ### 5.1 Set the app env
@@ -503,8 +503,8 @@ runbook example says.
 ## Notes
 
 - **Single source of truth.** The index body is
-  `xpress-service/src/services/product/search/repository/productsIndexBody.ts`, and the ingest
-  pipeline is `ingestPipeline.ts` next to it. Nothing here defines the index any more. The mapping
+  `xpress-service/src/services/product/search/core/provisioning/productsIndexBody.ts`, and the
+  ingest pipeline is `getIngestPipelineBody.ts` next to it. Nothing here defines the index any more. The mapping
   is `strict` and pins the vector method (`hnsw` / `lucene` / `cosinesimil`).
 - **`number_of_replicas: 0`** is set in `productsIndexBody.ts` and is fine for local and
   single-node environments. Before an alias cutover makes an index the production search target,
