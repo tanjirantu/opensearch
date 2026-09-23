@@ -132,7 +132,7 @@ provider whose endpoint matches `trusted_connector_endpoints_regex` from step 2 
 
 > **Dimension contract — decide this before anything else.** Whatever model you pick, its output
 > dimension must equal the app's `EMBEDDING_DIMENSION` (default **1536**), which
-> `productMappings.ts` uses for `embedding_vector.dimension`. It cannot change in place once
+> `productsIndexBody.ts` uses for `embedding_vector.dimension`. It cannot change in place once
 > indexing has begun: a different dimension means a new index and a reindex.
 
 Common OpenAI choices:
@@ -228,7 +228,8 @@ inference actually works.
 The app owns every cluster-side resource except the model: the **ingest pipeline**
 (`embedding_text → embedding_vector` at index time), the **hybrid search pipeline** (score fusion
 at query time) and the **index** itself. Their definitions live in `xpress-service`
-(`repository/pipeline-admin.ts`, `repository/productMappings.ts`), so a new environment is
+(`repository/ingestPipeline.ts`, `repository/searchPipeline.ts`,
+`repository/productsIndexBody.ts`), so a new environment is
 provisioned from source.
 
 ### 5.1 Set the app env
@@ -501,10 +502,10 @@ runbook example says.
 ## Notes
 
 - **Single source of truth.** The index body is
-  `xpress-service/src/services/product/search/repository/productMappings.ts`, and the ingest
-  pipeline is `pipeline-admin.ts` next to it. Nothing here defines the index any more. The mapping
+  `xpress-service/src/services/product/search/repository/productsIndexBody.ts`, and the ingest
+  pipeline is `ingestPipeline.ts` next to it. Nothing here defines the index any more. The mapping
   is `strict` and pins the vector method (`hnsw` / `lucene` / `cosinesimil`).
-- **`number_of_replicas: 0`** is set in `productMappings.ts` and is fine for local and
+- **`number_of_replicas: 0`** is set in `productsIndexBody.ts` and is fine for local and
   single-node environments. Before an alias cutover makes an index the production search target,
   raise it (`PUT /<target_index>/_settings {"index.number_of_replicas": 1}`) — with no replica, one
   data-node restart takes `products` red and search starts returning 503s.
